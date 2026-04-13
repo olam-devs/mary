@@ -1,0 +1,245 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-cream: #F5F7FA;
+    --color-gold: #FF5722;
+    --color-gold-dark: #E04010;
+    --color-earth: #1B2A4A;
+    --color-forest: #0D9488;
+    --color-sand: #BAE6FD;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-cream-100 text-earth-900;
+    font-family: var(--font-inter), system-ui, sans-serif;
+  }
+
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-playfair), Georgia, serif;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+  }
+
+  ::selection {
+    background-color: #FF572233;
+    color: #1B2A4A;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@layer components {
+  /* ==================== BUTTONS ==================== */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-gold-400 hover:bg-gold-500 text-earth-900 font-semibold
+           px-8 py-4 transition-all duration-300 tracking-widest uppercase text-xs
+           shadow-lg hover:shadow-glow active:scale-[0.98];
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 bg-earth-900 hover:bg-earth-800 text-cream-100 font-semibold
+           px-8 py-4 transition-all duration-300 tracking-widest uppercase text-xs
+           shadow-lg active:scale-[0.98];
+  }
+
+  .btn-outline-light {
+    @apply inline-flex items-center justify-center gap-2 border border-cream-100 text-cream-100
+           hover:bg-cream-100 hover:text-earth-900 font-semibold
+           px-8 py-4 transition-all duration-300 tracking-widest uppercase text-xs;
+  }
+
+  .btn-outline-dark {
+    @apply inline-flex items-center justify-center gap-2 border border-earth-900 text-earth-900
+           hover:bg-earth-900 hover:text-cream-100 font-semibold
+           px-8 py-4 transition-all duration-300 tracking-widest uppercase text-xs;
+  }
+
+  .btn-gold-outline {
+    @apply inline-flex items-center justify-center gap-2 border border-gold-400 text-gold-400
+           hover:bg-gold-400 hover:text-earth-900 font-semibold
+           px-8 py-4 transition-all duration-300 tracking-widest uppercase text-xs;
+  }
+
+  /* ==================== SECTION LABELS ==================== */
+  .label-gold {
+    @apply text-gold-400 uppercase tracking-luxury text-xs font-semibold;
+  }
+
+  .label-earth {
+    @apply text-earth-500 uppercase tracking-luxury text-xs font-semibold;
+  }
+
+  /* ==================== SECTION HEADINGS ==================== */
+  .section-title {
+    @apply font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-earth-900 leading-tight;
+  }
+
+  .section-title-light {
+    @apply font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-cream-100 leading-tight;
+  }
+
+  /* ==================== CARDS ==================== */
+  .card-base {
+    @apply bg-white shadow-card hover:shadow-card-hover transition-all duration-500 overflow-hidden;
+  }
+
+  .card-dark {
+    @apply bg-earth-900 shadow-card hover:shadow-card-hover transition-all duration-500 overflow-hidden;
+  }
+
+  /* ==================== INPUTS ==================== */
+  .input-field {
+    @apply w-full bg-cream-100 border border-sand-300 text-earth-900 px-5 py-4
+           placeholder:text-earth-400 focus:outline-none focus:border-gold-400
+           focus:ring-1 focus:ring-gold-400 transition-colors duration-200 text-sm;
+  }
+
+  .select-field {
+    @apply w-full bg-cream-100 border border-sand-300 text-earth-900 px-5 py-4
+           focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400
+           transition-colors duration-200 text-sm appearance-none cursor-pointer;
+  }
+
+  textarea.input-field {
+    @apply resize-none min-h-[140px];
+  }
+
+  /* ==================== DIVIDERS ==================== */
+  .divider-gold {
+    @apply h-px bg-gradient-to-r from-transparent via-gold-400 to-transparent my-2;
+  }
+
+  .divider-light {
+    @apply h-px bg-gradient-to-r from-transparent via-cream-200 to-transparent;
+  }
+
+  /* ==================== IMAGE OVERLAY CARDS ==================== */
+  .img-card-gradient {
+    background: linear-gradient(to top, rgba(27,42,74,0.92) 0%, rgba(27,42,74,0.4) 50%, rgba(27,42,74,0.05) 100%);
+  }
+
+  /* ==================== SCROLLBAR ==================== */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #F5F7FA;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #FF5722;
+    border-radius: 2px;
+  }
+
+  /* ==================== PROSE (Blog Content) ==================== */
+  .prose-travel {
+    @apply prose prose-stone max-w-none;
+  }
+
+  .prose-travel h2 {
+    @apply font-serif text-earth-900 text-3xl mt-12 mb-6;
+  }
+
+  .prose-travel h3 {
+    @apply font-serif text-earth-800 text-2xl mt-8 mb-4;
+  }
+
+  .prose-travel p {
+    @apply text-earth-700 leading-8 text-lg mb-6;
+  }
+
+  .prose-travel blockquote {
+    @apply border-l-4 border-gold-400 pl-6 italic text-earth-600 my-8;
+  }
+
+  .prose-travel a {
+    @apply text-gold-500 underline hover:text-gold-600;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .clip-diagonal {
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+  }
+
+  .clip-diagonal-rev {
+    clip-path: polygon(0 0, 100% 8%, 100% 100%, 0 100%);
+  }
+
+  .line-clamp-2 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .line-clamp-3 {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  .gradient-gold {
+    background: linear-gradient(135deg, #FF5722 0%, #FF9A72 50%, #FF5722 100%);
+  }
+
+  .gradient-earth {
+    background: linear-gradient(135deg, #090F1C 0%, #1B2A4A 100%);
+  }
+
+  /* Parallax-like stationary background */
+  .bg-fixed-cover {
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+  }
+}
+
+/* ==================== ANIMATIONS ==================== */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes pulse-orange {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-pulse-gold {
+  animation: pulse-orange 2s ease-in-out infinite;
+}
+
+/* Loading skeleton */
+.skeleton {
+  background: linear-gradient(90deg, #E8ECF2 25%, #F5F7FA 50%, #E8ECF2 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
