@@ -18,6 +18,7 @@ export default defineConfig({
         S.list()
           .title('Content')
           .items([
+            // ── Collections ──
             S.listItem()
               .title('Blog Posts')
               .schemaType('blogPost')
@@ -30,11 +31,30 @@ export default defineConfig({
               .title('Portfolio Items')
               .schemaType('portfolioItem')
               .child(S.documentTypeList('portfolioItem').title('Portfolio Items')),
+
             S.divider(),
+
+            // ── Pages ──
             S.listItem()
-              .title('About Content')
+              .title('Homepage')
+              .schemaType('homepageContent')
+              .child(S.document().schemaType('homepageContent').documentId('homepageContent')),
+            S.listItem()
+              .title('About Page')
               .schemaType('aboutContent')
               .child(S.document().schemaType('aboutContent').documentId('aboutContent')),
+            S.listItem()
+              .title('Portfolio Page')
+              .schemaType('portfolioSettings')
+              .child(S.document().schemaType('portfolioSettings').documentId('portfolioSettings')),
+            S.listItem()
+              .title('Contact Page')
+              .schemaType('contactPage')
+              .child(S.document().schemaType('contactPage').documentId('contactPage')),
+
+            S.divider(),
+
+            // ── Global ──
             S.listItem()
               .title('Site Settings')
               .schemaType('siteSettings')

@@ -174,10 +174,7 @@ export async function getAllPortfolioItems(): Promise<PortfolioItem[]> {
 export async function getAboutContent(): Promise<AboutContent> {
   const query = `*[_type == "aboutContent"][0] {
     _id,
-    heroTitle,
-    heroSubtitle,
     heroImage ${IMAGE_PROJECTION},
-    bio,
     quote,
     beliefs,
     forExplorer {

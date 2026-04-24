@@ -6,28 +6,12 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'heroTitle',
-      title: 'Hero Title',
-      type: 'string',
-      initialValue: 'Mary Minza Lucas',
-    }),
-    defineField({
-      name: 'heroSubtitle',
-      title: 'Hero Subtitle',
-      type: 'string',
-      initialValue: 'Content Creator · Digital Marketing Strategist · Tanzania Explorer',
-    }),
-    defineField({
       name: 'heroImage',
-      title: 'Hero / Profile Image',
+      title: 'Profile Image',
+      description: 'Shown in the "Who I Am" section on the About page',
       type: 'image',
       options: { hotspot: true },
-    }),
-    defineField({
-      name: 'bio',
-      title: 'Biography (Rich Text)',
-      type: 'array',
-      of: [{ type: 'block' }],
+      fields: [defineField({ name: 'alt', type: 'string', title: 'Alt Text' })],
     }),
     defineField({
       name: 'quote',
