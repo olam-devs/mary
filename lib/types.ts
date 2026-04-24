@@ -89,16 +89,6 @@ export interface AboutContent {
   stats?: Array<{ value: string; label: string }>
 }
 
-export interface SiteTheme {
-  primaryColor?: string
-  primaryHover?: string
-  darkColor?: string
-  lightColor?: string
-  navbarBg?: string
-  footerBg?: string
-  buttonTextColor?: string
-}
-
 export interface SiteSettings {
   _id: string
   siteTitle?: string
@@ -110,7 +100,6 @@ export interface SiteSettings {
   youtube?: string
   tiktok?: string
   mediaKit?: { asset: { url: string } }
-  theme?: SiteTheme
 }
 
 export interface BlogPageContent {

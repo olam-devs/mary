@@ -1,11 +1,8 @@
-export const revalidate = 0
-
 import type { Metadata } from 'next'
 import { Playfair_Display, Inter } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import { getSiteSettings } from '@/lib/queries'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -71,38 +68,9 @@ export const metadata: Metadata = {
   },
 }
 
-function buildThemeCSS(theme?: {
-  primaryColor?: string
-  primaryHover?: string
-  darkColor?: string
-  lightColor?: string
-  navbarBg?: string
-  footerBg?: string
-  buttonTextColor?: string
-}): string {
-  if (!theme) return ''
-  const vars: string[] = []
-  if (theme.primaryColor)   vars.push(`--primary: ${theme.primaryColor}`)
-  if (theme.primaryHover)   vars.push(`--primary-hover: ${theme.primaryHover}`)
-  if (theme.darkColor)      vars.push(`--dark: ${theme.darkColor}; --dark-medium: ${theme.darkColor}cc`)
-  if (theme.lightColor)     vars.push(`--light: ${theme.lightColor}`)
-  if (theme.navbarBg)       vars.push(`--navbar-bg: ${theme.navbarBg}`)
-  if (theme.footerBg)       vars.push(`--footer-bg: ${theme.footerBg}`)
-  if (theme.buttonTextColor) vars.push(`--primary-text: ${theme.buttonTextColor}`)
-  if (theme.primaryColor)   vars.push(`--accent-text: ${theme.primaryColor}`)
-  if (!vars.length) return ''
-  return `:root { ${vars.join('; ')} }`
-}
-
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const settings = await getSiteSettings()
-  const themeCSS = buildThemeCSS(settings.theme)
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
-      <head>
-        {themeCSS && <style dangerouslySetInnerHTML={{ __html: themeCSS }} />}
-      </head>
       <body className="bg-cream-100 text-earth-900 font-sans antialiased overflow-x-hidden">
         <Navbar />
         <main className="min-h-screen">{children}</main>

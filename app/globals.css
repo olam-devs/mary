@@ -4,21 +4,9 @@
 
 @layer base {
   :root {
-    /* Brand colour tokens — overridden at runtime by Sanity theme settings */
-    --primary:        #FF6B35;
-    --primary-hover:  #FF5722;
-    --primary-text:   #090F1C;
-    --dark:           #090F1C;
-    --dark-medium:    #111C33;
-    --light:          #F5F7FA;
-    --navbar-bg:      #090F1C;
-    --footer-bg:      #090F1C;
-    --accent-text:    #FF6B35;
-
-    /* Legacy aliases kept for globals.css utility classes */
     --color-cream: #F5F7FA;
-    --color-gold: #FF6B35;
-    --color-gold-dark: #FF5722;
+    --color-gold: #FF5722;
+    --color-gold-dark: #E04010;
     --color-earth: #1B2A4A;
     --color-forest: #0D9488;
     --color-sand: #BAE6FD;
@@ -60,51 +48,38 @@
 @layer components {
   /* ==================== BUTTONS ==================== */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 font-semibold
+    @apply inline-flex items-center justify-center gap-2 bg-gold-400 hover:bg-gold-500 text-earth-900 font-semibold
            px-8 py-4 transition-all duration-300 tracking-widest uppercase text-xs
-           shadow-lg active:scale-[0.98];
-    background-color: var(--primary);
-    color: var(--primary-text);
+           shadow-lg hover:shadow-glow active:scale-[0.98];
   }
-  .btn-primary:hover { background-color: var(--primary-hover); }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 font-semibold
+    @apply inline-flex items-center justify-center gap-2 bg-earth-900 hover:bg-earth-800 text-cream-100 font-semibold
            px-8 py-4 transition-all duration-300 tracking-widest uppercase text-xs
            shadow-lg active:scale-[0.98];
-    background-color: var(--dark);
-    color: var(--light);
   }
-  .btn-secondary:hover { background-color: var(--dark-medium); }
 
   .btn-outline-light {
-    @apply inline-flex items-center justify-center gap-2 font-semibold
+    @apply inline-flex items-center justify-center gap-2 border border-cream-100 text-cream-100
+           hover:bg-cream-100 hover:text-earth-900 font-semibold
            px-8 py-4 transition-all duration-300 tracking-widest uppercase text-xs;
-    border: 1px solid var(--light);
-    color: var(--light);
   }
-  .btn-outline-light:hover { background-color: var(--light); color: var(--dark); }
 
   .btn-outline-dark {
-    @apply inline-flex items-center justify-center gap-2 font-semibold
+    @apply inline-flex items-center justify-center gap-2 border border-earth-900 text-earth-900
+           hover:bg-earth-900 hover:text-cream-100 font-semibold
            px-8 py-4 transition-all duration-300 tracking-widest uppercase text-xs;
-    border: 1px solid var(--dark);
-    color: var(--dark);
   }
-  .btn-outline-dark:hover { background-color: var(--dark); color: var(--light); }
 
   .btn-gold-outline {
-    @apply inline-flex items-center justify-center gap-2 font-semibold
+    @apply inline-flex items-center justify-center gap-2 border border-gold-400 text-gold-400
+           hover:bg-gold-400 hover:text-earth-900 font-semibold
            px-8 py-4 transition-all duration-300 tracking-widest uppercase text-xs;
-    border: 1px solid var(--primary);
-    color: var(--primary);
   }
-  .btn-gold-outline:hover { background-color: var(--primary); color: var(--primary-text); }
 
   /* ==================== SECTION LABELS ==================== */
   .label-gold {
-    @apply uppercase tracking-luxury text-xs font-semibold;
-    color: var(--accent-text);
+    @apply text-gold-400 uppercase tracking-luxury text-xs font-semibold;
   }
 
   .label-earth {
@@ -113,8 +88,7 @@
 
   /* ==================== SECTION HEADINGS ==================== */
   .section-title {
-    @apply font-serif text-4xl md:text-5xl lg:text-6xl font-bold leading-tight;
-    color: var(--dark);
+    @apply font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-earth-900 leading-tight;
   }
 
   .section-title-light {
@@ -149,8 +123,7 @@
 
   /* ==================== DIVIDERS ==================== */
   .divider-gold {
-    @apply h-px my-2;
-    background: linear-gradient(to right, transparent, var(--primary), transparent);
+    @apply h-px bg-gradient-to-r from-transparent via-gold-400 to-transparent my-2;
   }
 
   .divider-light {

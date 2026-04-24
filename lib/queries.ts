@@ -237,8 +237,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     twitter,
     youtube,
     tiktok,
-    mediaKit { asset->{ url } },
-    theme
+    mediaKit { asset->{ url } }
   }`
   const result = await sanityFetch<any>(query)
   return result ?? mockSiteSettings
