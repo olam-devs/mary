@@ -16,7 +16,7 @@ export const sanityClient = isSanityConfigured
       projectId: projectId!,
       dataset,
       apiVersion,
-      useCdn: process.env.NODE_ENV === 'production',
+      useCdn: false,
       perspective: 'published',
       token: readToken,
       // Increase timeouts for build-time fetches
