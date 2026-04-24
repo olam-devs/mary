@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     'Mary Minza Lucas partners with hotels, restaurants, and destinations to create authentic UGC, manage social media, and tell immersive travel stories. View the portfolio.',
 }
 
-const HERO_BG = 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&q=80'
+const DEFAULT_HERO_BG = 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&q=80'
 
 const typeColors: Record<string, string> = {
   UGC: 'bg-gold-400 text-earth-900',
@@ -53,7 +53,7 @@ export default async function PortfolioPage() {
       <section className="relative pt-20 min-h-[65vh] flex flex-col items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src={HERO_BG}
+            src={portfolioData.heroBgImage?.imageUrl || DEFAULT_HERO_BG}
             alt="Partnership with MaryMinza"
             fill
             priority

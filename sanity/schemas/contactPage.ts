@@ -6,6 +6,13 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'heroBgImage',
+      title: 'Hero — Background Image',
+      type: 'image',
+      description: 'Full-width background image behind the contact hero',
+      options: { hotspot: true },
+    }),
+    defineField({
       name: 'heroDescription',
       title: 'Hero — Description',
       type: 'text',

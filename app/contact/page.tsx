@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     'Get in touch with Mary Minza Lucas for travel package bookings, brand partnerships, social media management, or any Tanzania travel questions.',
 }
 
-const HERO_BG = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=75'
+const DEFAULT_HERO_BG = 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=75'
 
 export default async function ContactPage() {
   const [content, settings] = await Promise.all([
@@ -49,7 +49,7 @@ export default async function ContactPage() {
       <section className="relative pt-20 min-h-[50vh] flex flex-col items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src={HERO_BG}
+            src={content.heroBgImage?.imageUrl || DEFAULT_HERO_BG}
             alt="Contact Mary Minza Lucas"
             fill
             priority

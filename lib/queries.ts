@@ -1,5 +1,5 @@
 import { sanityFetch } from './sanity'
-import type { BlogPost, TravelPackage, PortfolioItem, AboutContent, SiteSettings, HomepageContent, ContactPageContent, PortfolioSettings } from './types'
+import type { BlogPost, TravelPackage, PortfolioItem, AboutContent, SiteSettings, HomepageContent, ContactPageContent, PortfolioSettings, BlogPageContent, PackagesPageContent } from './types'
 import { mockBlogPosts, mockPackages, mockPortfolioItems, mockAboutContent, mockSiteSettings, mockHomepageContent, mockContactPageContent, mockPortfolioSettings } from './mockData'
 
 const IMAGE_PROJECTION = `{
@@ -174,8 +174,11 @@ export async function getAllPortfolioItems(): Promise<PortfolioItem[]> {
 export async function getAboutContent(): Promise<AboutContent> {
   const query = `*[_type == "aboutContent"][0] {
     _id,
-    heroImage ${IMAGE_PROJECTION},
+    heroBgImage ${IMAGE_PROJECTION},
     quote,
+    profileImage ${IMAGE_PROJECTION},
+    bioText,
+    highlights,
     beliefs,
     forExplorer {
       heading,
@@ -194,8 +197,11 @@ export async function getAboutContent(): Promise<AboutContent> {
   if (!result) return mockAboutContent
   return {
     ...result,
-    heroImage: result.heroImage
-      ? { ...result.heroImage, imageUrl: result.heroImage?.asset?.url }
+    heroBgImage: result.heroBgImage
+      ? { ...result.heroBgImage, imageUrl: result.heroBgImage?.asset?.url }
+      : undefined,
+    profileImage: result.profileImage
+      ? { ...result.profileImage, imageUrl: result.profileImage?.asset?.url }
       : undefined,
     forExplorer: result.forExplorer
       ? {
@@ -231,7 +237,8 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     twitter,
     youtube,
     tiktok,
-    mediaKit { asset->{ url } }
+    mediaKit { asset->{ url } },
+    theme
   }`
   const result = await sanityFetch<any>(query)
   return result ?? mockSiteSettings
@@ -272,6 +279,7 @@ export async function getHomepageContent(): Promise<HomepageContent> {
 
 export async function getContactPageContent(): Promise<ContactPageContent> {
   const query = `*[_type == "contactPage"][0] {
+    heroBgImage ${IMAGE_PROJECTION},
     heroDescription,
     subDescription,
     ctaHeading,
@@ -279,7 +287,13 @@ export async function getContactPageContent(): Promise<ContactPageContent> {
     responseTimes
   }`
   const result = await sanityFetch<any>(query)
-  return result ?? mockContactPageContent
+  if (!result) return mockContactPageContent
+  return {
+    ...result,
+    heroBgImage: result.heroBgImage
+      ? { ...result.heroBgImage, imageUrl: result.heroBgImage?.asset?.url }
+      : undefined,
+  }
 }
 
 // ============================================================
@@ -288,6 +302,7 @@ export async function getContactPageContent(): Promise<ContactPageContent> {
 
 export async function getPortfolioSettings(): Promise<PortfolioSettings> {
   const query = `*[_type == "portfolioSettings"][0] {
+    heroBgImage ${IMAGE_PROJECTION},
     heroDescription,
     services,
     pitchDescription,
@@ -295,5 +310,52 @@ export async function getPortfolioSettings(): Promise<PortfolioSettings> {
     testimonials
   }`
   const result = await sanityFetch<any>(query)
-  return result ?? mockPortfolioSettings
+  if (!result) return mockPortfolioSettings
+  return {
+    ...result,
+    heroBgImage: result.heroBgImage
+      ? { ...result.heroBgImage, imageUrl: result.heroBgImage?.asset?.url }
+      : undefined,
+  }
+}
+
+// ============================================================
+// BLOG PAGE CONTENT
+// ============================================================
+
+export async function getBlogPageContent(): Promise<BlogPageContent> {
+  const query = `*[_type == "blogPage"][0] {
+    heroBgImage ${IMAGE_PROJECTION},
+    heroTitle,
+    heroDescription
+  }`
+  const result = await sanityFetch<any>(query)
+  if (!result) return {}
+  return {
+    ...result,
+    heroBgImage: result.heroBgImage
+      ? { ...result.heroBgImage, imageUrl: result.heroBgImage?.asset?.url }
+      : undefined,
+  }
+}
+
+// ============================================================
+// PACKAGES PAGE CONTENT
+// ============================================================
+
+export async function getPackagesPageContent(): Promise<PackagesPageContent> {
+  const query = `*[_type == "packagesPage"][0] {
+    heroBgImage ${IMAGE_PROJECTION},
+    heroTitle,
+    heroTitleItalic,
+    heroDescription
+  }`
+  const result = await sanityFetch<any>(query)
+  if (!result) return {}
+  return {
+    ...result,
+    heroBgImage: result.heroBgImage
+      ? { ...result.heroBgImage, imageUrl: result.heroBgImage?.asset?.url }
+      : undefined,
+  }
 }

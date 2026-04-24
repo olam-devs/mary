@@ -5,7 +5,14 @@ export default defineType({
   title: 'Portfolio Page',
   type: 'document',
   fields: [
-    // ── Hero description ──
+    // ── Hero ──
+    defineField({
+      name: 'heroBgImage',
+      title: 'Hero — Background Image',
+      type: 'image',
+      description: 'Full-width background image behind the portfolio hero',
+      options: { hotspot: true },
+    }),
     defineField({
       name: 'heroDescription',
       title: 'Hero — Description (Bold)',

@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { FiArrowRight } from 'react-icons/fi'
 import PackageCard from '@/components/PackageCard'
 import AnimatedSection, { StaggerContainer, StaggerItem } from '@/components/AnimatedSection'
-import { getAllPackages } from '@/lib/queries'
+import { getAllPackages, getPackagesPageContent } from '@/lib/queries'
 
 export const metadata: Metadata = {
   title: 'Travel Packages — Curated Tanzania Experiences',
@@ -14,10 +14,10 @@ export const metadata: Metadata = {
     'Curated travel packages designed by Mary Minza Lucas — Serengeti safari, Zanzibar getaways, Dar es Salaam city tours, and more. Transparent pricing for every group size.',
 }
 
-const HERO_BG = 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1920&q=80'
+const DEFAULT_HERO_BG = 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1920&q=80'
 
 export default async function PackagesPage() {
-  const packages = await getAllPackages()
+  const [packages, pkgPage] = await Promise.all([getAllPackages(), getPackagesPageContent()])
 
   const categories = [
     { value: 'all', label: 'All' },
@@ -36,7 +36,7 @@ export default async function PackagesPage() {
       <section className="relative pt-20 min-h-[65vh] flex flex-col items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src={HERO_BG}
+            src={pkgPage.heroBgImage?.imageUrl || DEFAULT_HERO_BG}
             alt="Tanzania Travel Packages"
             fill
             priority
@@ -49,14 +49,14 @@ export default async function PackagesPage() {
           <AnimatedSection>
             <p className="label-gold mb-4">Mary's Curated Experiences</p>
             <h1 className="font-serif text-6xl sm:text-7xl font-bold text-cream-100 leading-none mb-4">
-              Travel
+              {pkgPage.heroTitle || 'Travel'}
             </h1>
             <h1 className="font-serif text-6xl sm:text-7xl font-bold text-gold-400 italic leading-none mb-8">
-              Packages
+              {pkgPage.heroTitleItalic || 'Packages'}
             </h1>
             <p className="text-cream-100/75 text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-10">
-              Every package is personally designed and tested by Mary. No filler days, no generic
-              itineraries — just handpicked experiences with transparent pricing for every group size.
+              {pkgPage.heroDescription ||
+                'Every package is personally designed and tested by Mary. No filler days, no generic itineraries — just handpicked experiences with transparent pricing for every group size.'}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a href="#packages" className="btn-primary">

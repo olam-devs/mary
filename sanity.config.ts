@@ -36,19 +36,27 @@ export default defineConfig({
 
             // ── Pages ──
             S.listItem()
-              .title('Homepage')
+              .title('🏠 Homepage')
               .schemaType('homepageContent')
               .child(S.document().schemaType('homepageContent').documentId('homepageContent')),
             S.listItem()
-              .title('About Page')
+              .title('📖 Blog Page')
+              .schemaType('blogPage')
+              .child(S.document().schemaType('blogPage').documentId('blogPage')),
+            S.listItem()
+              .title('✈️ Packages Page')
+              .schemaType('packagesPage')
+              .child(S.document().schemaType('packagesPage').documentId('packagesPage')),
+            S.listItem()
+              .title('👤 About Page')
               .schemaType('aboutContent')
               .child(S.document().schemaType('aboutContent').documentId('aboutContent')),
             S.listItem()
-              .title('Portfolio Page')
+              .title('💼 Portfolio Page')
               .schemaType('portfolioSettings')
               .child(S.document().schemaType('portfolioSettings').documentId('portfolioSettings')),
             S.listItem()
-              .title('Contact Page')
+              .title('📞 Contact Page')
               .schemaType('contactPage')
               .child(S.document().schemaType('contactPage').documentId('contactPage')),
 

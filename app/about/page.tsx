@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     'Content creator, digital marketing strategist, and Tanzania explorer. Mary Minza Lucas explores hidden gems in Dar es Salaam, Zanzibar, Serengeti, and beyond — making adventure accessible.',
 }
 
-const HERO_BG = 'https://images.unsplash.com/photo-1527631746610-bca00a040d60?w=1920&q=80'
+const DEFAULT_HERO_BG = 'https://images.unsplash.com/photo-1527631746610-bca00a040d60?w=1920&q=80'
 const EXPLORER_IMG = '/mary-about1.jpeg'
 const BRAND_IMG = '/mission.jpeg'
 
@@ -55,7 +55,7 @@ export default async function AboutPage() {
       <section className="relative pt-20 min-h-[70vh] flex flex-col items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src={HERO_BG}
+            src={about.heroBgImage?.imageUrl || DEFAULT_HERO_BG}
             alt="Mary Minza Lucas — About"
             fill
             priority
@@ -106,8 +106,8 @@ export default async function AboutPage() {
             <AnimatedSection direction="left" className="relative">
               <div className="relative aspect-[3/4] max-w-md mx-auto lg:mx-0 overflow-hidden shadow-luxury">
                 <Image
-                  src={about.heroImage?.imageUrl || '/started.jpeg'}
-                  alt={about.heroImage?.alt || 'Mary Minza Lucas'}
+                  src={about.profileImage?.imageUrl || '/started.jpeg'}
+                  alt={about.profileImage?.alt || 'Mary Minza Lucas'}
                   fill
                   className="object-cover object-top"
                   sizes="(max-width: 1024px) 80vw, 40vw"
@@ -130,32 +130,23 @@ export default async function AboutPage() {
               </h2>
 
               <div className="space-y-5 text-earth-600 text-base leading-8">
-                <p>
-                  I'm Mary Minza Lucas — a content creator and social media strategist based in
-                  Dar es Salaam, Tanzania. I believe deeply that extraordinary travel experiences
-                  shouldn't be reserved only for those with extraordinary budgets.
-                </p>
-                <p>
-                  My work begins where guidebooks end. I explore the hidden restaurants of Kariakoo,
-                  the boutique guesthouses in Stone Town no algorithm has found yet, the waterfalls
-                  above Moshi that most visitors drive right past. I bring those discoveries to you
-                  with honesty, detail, and cinematic storytelling.
-                </p>
-                <p>
-                  Beyond travel content, I work as a digital marketing strategist for hospitality
-                  brands — helping hotels, restaurants, and destinations connect with the modern
-                  traveler through authentic narrative, not polished stock photos.
-                </p>
+                {(about.bioText?.length ? about.bioText : [
+                  "I'm Mary Minza Lucas — a content creator and social media strategist based in Dar es Salaam, Tanzania. I believe deeply that extraordinary travel experiences shouldn't be reserved only for those with extraordinary budgets.",
+                  "My work begins where guidebooks end. I explore the hidden restaurants of Kariakoo, the boutique guesthouses in Stone Town no algorithm has found yet, the waterfalls above Moshi that most visitors drive right past. I bring those discoveries to you with honesty, detail, and cinematic storytelling.",
+                  "Beyond travel content, I work as a digital marketing strategist for hospitality brands — helping hotels, restaurants, and destinations connect with the modern traveler through authentic narrative, not polished stock photos.",
+                ]).map((para, i) => (
+                  <p key={i}>{para}</p>
+                ))}
               </div>
 
               {/* Highlights */}
               <ul className="mt-8 space-y-3">
-                {[
+                {(about.highlights?.length ? about.highlights : [
                   'National Geographic Externship — East Africa',
                   'Explored 120+ destinations across Tanzania',
                   'Digital marketing for 30+ hospitality brands',
                   'Solo, group & curated group travel experiences',
-                ].map((item) => (
+                ]).map((item) => (
                   <li key={item} className="flex items-start gap-3 text-earth-700 text-sm">
                     <div className="w-5 h-5 bg-gold-400 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                       <FiCheck size={11} className="text-earth-900" />

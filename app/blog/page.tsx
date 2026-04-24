@@ -8,7 +8,7 @@ import { FiSearch } from 'react-icons/fi'
 import BlogCard from '@/components/BlogCard'
 import CategoryFilter from '@/components/CategoryFilter'
 import AnimatedSection from '@/components/AnimatedSection'
-import { getAllBlogPosts } from '@/lib/queries'
+import { getAllBlogPosts, getBlogPageContent } from '@/lib/queries'
 import type { BlogCategory } from '@/lib/types'
 
 export const metadata: Metadata = {
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     'Detailed travel guides, budget itineraries, and authentic stories from Tanzania. Solo travel, group adventures, boutique hotels, and local restaurants — all covered by Mary Minza Lucas.',
 }
 
-const HERO_BG = 'https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=1920&q=75'
+const DEFAULT_HERO_BG = 'https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=1920&q=75'
 
 interface BlogPageProps {
   searchParams: Promise<{ category?: string; q?: string }>
@@ -27,7 +27,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   const { category, q } = await searchParams
   const activeCategory = (category || 'all') as BlogCategory
 
-  const allPosts = await getAllBlogPosts()
+  const [allPosts, blogPage] = await Promise.all([getAllBlogPosts(), getBlogPageContent()])
 
   // Filter by category
   let filtered = activeCategory === 'all'
@@ -54,7 +54,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
       <section className="relative pt-20 min-h-[55vh] flex flex-col items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src={HERO_BG}
+            src={blogPage.heroBgImage?.imageUrl || DEFAULT_HERO_BG}
             alt="Tanzania Travel Blog"
             fill
             priority
@@ -67,12 +67,12 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           <AnimatedSection>
             <p className="label-gold mb-4">Mary Minza Lucas</p>
             <h1 className="font-serif text-6xl sm:text-7xl font-bold text-cream-100 mb-4">
-              The Blog
+              {blogPage.heroTitle || 'The Blog'}
             </h1>
             <div className="divider-gold max-w-20 mx-auto mb-8" />
             <p className="text-cream-100/75 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
-              Tanzania is full of secrets and I'm here to share them. I go beyond postcards to bring
-              you detailed guides on hidden hotels, local restaurants, and budget-friendly itineraries.
+              {blogPage.heroDescription ||
+                "Tanzania is full of secrets and I'm here to share them. I go beyond postcards to bring you detailed guides on hidden hotels, local restaurants, and budget-friendly itineraries."}
             </p>
           </AnimatedSection>
         </div>

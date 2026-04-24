@@ -77,16 +77,26 @@ export interface TimelineItem {
 
 export interface AboutContent {
   _id: string
-  heroTitle?: string
-  heroSubtitle?: string
-  heroImage?: SanityImage & { imageUrl?: string }
-  bio?: any[]
+  heroBgImage?: SanityImage & { imageUrl?: string }
   quote?: string
+  profileImage?: SanityImage & { imageUrl?: string }
+  bioText?: string[]
+  highlights?: string[]
   beliefs?: Array<{ title: string; description?: string; icon?: string }>
   forExplorer?: { heading?: string; body?: string; image?: SanityImage & { imageUrl?: string } }
   forBrand?: { heading?: string; body?: string; image?: SanityImage & { imageUrl?: string } }
   timeline?: TimelineItem[]
   stats?: Array<{ value: string; label: string }>
+}
+
+export interface SiteTheme {
+  primaryColor?: string
+  primaryHover?: string
+  darkColor?: string
+  lightColor?: string
+  navbarBg?: string
+  footerBg?: string
+  buttonTextColor?: string
 }
 
 export interface SiteSettings {
@@ -100,6 +110,20 @@ export interface SiteSettings {
   youtube?: string
   tiktok?: string
   mediaKit?: { asset: { url: string } }
+  theme?: SiteTheme
+}
+
+export interface BlogPageContent {
+  heroBgImage?: SanityImage & { imageUrl?: string }
+  heroTitle?: string
+  heroDescription?: string
+}
+
+export interface PackagesPageContent {
+  heroBgImage?: SanityImage & { imageUrl?: string }
+  heroTitle?: string
+  heroTitleItalic?: string
+  heroDescription?: string
 }
 
 export interface HomepageContent {
@@ -119,6 +143,7 @@ export interface HomepageContent {
 }
 
 export interface ContactPageContent {
+  heroBgImage?: SanityImage & { imageUrl?: string }
   heroDescription?: string
   subDescription?: string
   ctaHeading?: string
@@ -127,6 +152,7 @@ export interface ContactPageContent {
 }
 
 export interface PortfolioSettings {
+  heroBgImage?: SanityImage & { imageUrl?: string }
   heroDescription?: string
   services?: Array<{
     icon: string
