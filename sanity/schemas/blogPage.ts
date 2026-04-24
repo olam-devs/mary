@@ -24,7 +24,7 @@ export default defineType({
       type: 'text',
       rows: 3,
       initialValue:
-        'Tanzania is full of secrets and I'm here to share them. I go beyond postcards to bring you detailed guides on hidden hotels, local restaurants, and budget-friendly itineraries.',
+        "Tanzania is full of secrets and I'm here to share them. I go beyond postcards to bring you detailed guides on hidden hotels, local restaurants, and budget-friendly itineraries.",
     }),
   ],
   preview: {
