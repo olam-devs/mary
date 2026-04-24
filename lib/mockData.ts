@@ -323,10 +323,19 @@ export const mockPortfolioItems: PortfolioItem[] = [
 
 export const mockAboutContent: AboutContent = {
   _id: 'aboutContent',
-  heroTitle: 'Mary Minza Lucas',
-  heroSubtitle: 'Content Creator · Digital Marketing Strategist · Tanzania Explorer',
-  heroImage: { asset: { url: IMAGES.blogger }, alt: 'Mary Minza Lucas', imageUrl: IMAGES.blogger } as any,
+  profileImage: { asset: { url: IMAGES.blogger }, alt: 'Mary Minza Lucas', imageUrl: IMAGES.blogger } as any,
   quote: 'Adventure is a right, not a luxury.',
+  bioText: [
+    "I'm Mary Minza Lucas — a content creator and social media strategist based in Dar es Salaam, Tanzania. I believe deeply that extraordinary travel experiences shouldn't be reserved only for those with extraordinary budgets.",
+    "My work begins where guidebooks end. I explore the hidden restaurants of Kariakoo, the boutique guesthouses in Stone Town no algorithm has found yet, the waterfalls above Moshi that most visitors drive right past.",
+    "Beyond travel content, I work as a digital marketing strategist for hospitality brands — helping hotels, restaurants, and destinations connect with the modern traveler through authentic narrative, not polished stock photos.",
+  ],
+  highlights: [
+    'National Geographic Externship — East Africa',
+    'Explored 120+ destinations across Tanzania',
+    'Digital marketing for 30+ hospitality brands',
+    'Solo, group & curated group travel experiences',
+  ],
   beliefs: [
     {
       title: 'Affordable Adventures',
