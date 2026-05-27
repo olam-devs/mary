@@ -8,29 +8,19 @@ import { FiArrowRight } from 'react-icons/fi'
 import AnimatedSection, { StaggerContainer, StaggerItem } from '@/components/AnimatedSection'
 import BrandLogo from '@/components/BrandLogo'
 import { BRAND } from '@/lib/brand'
+import type { AboutContent, TimelineItem } from '@/lib/types'
 
 const DEFAULT_HERO_IMG = 'https://images.unsplash.com/photo-1527631746610-bca00a040d60?w=1920&q=80'
 const EXPLORER_IMG = '/mary-about1.jpeg'
 const BRAND_IMG = '/mission.jpeg'
 
-type Stat  = { value: string; label: string }
-type Belief = { icon: string; title: string; description: string }
-type TimelineItem = { year: string; event: string; description?: string }
-
-type AboutData = {
-  heroBgImage?: { imageUrl: string }
-  profileImage?: { imageUrl: string; alt?: string }
-  quote?: string
-  bioText?: string[]
-  highlights?: string[]
-  forExplorer?: { heading?: string; body?: string; image?: { imageUrl: string } }
-  forBrand?: { heading?: string; body?: string; image?: { imageUrl: string } }
-}
+type Stat = { value: string; label: string }
+type Belief = NonNullable<AboutContent['beliefs']>[number]
 
 export default function AboutPageClient({
   about, stats, timeline, beliefs,
 }: {
-  about: AboutData
+  about: AboutContent
   stats: Stat[]
   timeline: TimelineItem[]
   beliefs: Belief[]
@@ -193,7 +183,7 @@ export default function AboutPageClient({
                 >
                   <div className="flex items-start justify-between gap-6 mb-6">
                     <div className="w-11 h-11 bg-gold-400/15 border border-gold-400/25 flex items-center justify-center">
-                      <span className="text-2xl">{belief.icon}</span>
+                      <span className="text-2xl">{belief.icon ?? '✦'}</span>
                     </div>
                     <div className="h-px bg-gold-400/25 flex-1 mt-5" />
                   </div>
