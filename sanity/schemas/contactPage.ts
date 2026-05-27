@@ -7,23 +7,23 @@ export default defineType({
   fields: [
     defineField({
       name: 'heroBgImage',
-      title: 'Hero — Background Image',
+      title: 'Hero: Background Image',
       type: 'image',
       description: 'Full-width background image behind the contact hero',
       options: { hotspot: true },
     }),
     defineField({
       name: 'heroDescription',
-      title: 'Hero — Description',
+      title: 'Hero: Description',
       type: 'text',
       rows: 3,
       description: 'Bold text shown below the "Get in Touch" heading',
       initialValue:
-        "Whether you're planning a trip, exploring a partnership, or simply want to say hello — Mary personally reads every message.",
+        "Whether you're planning a trip, exploring a partnership, or simply want to say hello. Mary personally reads every message.",
     }),
     defineField({
       name: 'subDescription',
-      title: 'Contact Info — Sub Description',
+      title: 'Contact Info: Sub Description',
       type: 'text',
       rows: 3,
       description: 'Smaller text below the heading on the left column',
@@ -32,17 +32,17 @@ export default defineType({
     }),
     defineField({
       name: 'ctaHeading',
-      title: 'Quick CTA Box — Heading',
+      title: 'Quick CTA Box: Heading',
       type: 'string',
       initialValue: 'Planning a Trip?',
     }),
     defineField({
       name: 'ctaBody',
-      title: 'Quick CTA Box — Body',
+      title: 'Quick CTA Box: Body',
       type: 'text',
       rows: 2,
       initialValue:
-        "Skip the form — browse curated packages and use the price calculator to get instant pricing for your group.",
+        "Skip the form. Browse curated packages and use the price calculator to get instant pricing for your group.",
     }),
     defineField({
       name: 'responseTimes',

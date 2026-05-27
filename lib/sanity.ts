@@ -45,8 +45,8 @@ export async function sanityFetch<T = any>(
     return result ?? null
   } catch (error: any) {
     const msg = error?.message || String(error)
-    // Swallow all network/CORS/JSON errors — fall back to mock data
-    console.warn(`[Sanity] Fetch failed (${msg.slice(0, 80)}) — using mock data`)
+    // Swallow all network/CORS/JSON errors. Fall back to mock data.
+    console.warn(`[Sanity] Fetch failed (${msg.slice(0, 80)}). Using mock data`)
     return null
   }
 }

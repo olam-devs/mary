@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { FiInstagram, FiTwitter, FiYoutube, FiMail, FiArrowRight } from 'react-icons/fi'
 import { useState } from 'react'
+import BrandLogo from '@/components/BrandLogo'
+import { BRAND } from '@/lib/brand'
 
 const footerLinks = {
   explore: [
@@ -56,14 +58,8 @@ export default function Footer() {
 
           {/* Brand Column */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 bg-gold-400 flex items-center justify-center">
-                <span className="font-serif text-earth-900 font-bold text-sm">MML</span>
-              </div>
-              <div>
-                <div className="font-serif text-cream-100 font-bold text-base">Mary Minza Lucas</div>
-                <div className="text-earth-400 text-[10px] tracking-luxury uppercase">Tanzania · Est. 2019</div>
-              </div>
+            <div className="mb-6">
+              <BrandLogo size={44} variant="lockup" />
             </div>
             <p className="text-earth-300 text-sm leading-relaxed mb-6">
               Affordable Adventures. Authentic Stories. Hidden Tanzania Revealed.
@@ -138,12 +134,12 @@ export default function Footer() {
                 hello@maryminzalucas.com
               </a>
               <a
-                href="https://wa.me/255712345678"
+                href="https://wa.me/255793356660"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-earth-300 hover:text-gold-400 text-sm transition-colors duration-200"
               >
-                WhatsApp: +255 712 345 678
+                WhatsApp: +255 793 356 660
               </a>
             </div>
           </div>
@@ -152,7 +148,7 @@ export default function Footer() {
           <div>
             <h4 className="label-gold mb-6">Stay Inspired</h4>
             <p className="text-earth-300 text-sm leading-relaxed mb-6">
-              Hidden gems, honest travel guides, and brand partnership updates — straight to your inbox.
+              Hidden gems, honest travel guides, and brand partnership updates, straight to your inbox.
             </p>
 
             {subscribed ? (
@@ -194,7 +190,7 @@ export default function Footer() {
       <div className="border-t border-earth-800">
         <div className="max-w-screen-2xl mx-auto px-6 lg:px-10 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-earth-500 text-xs">
-            © {new Date().getFullYear()} Mary Minza Lucas. All rights reserved.
+            © {new Date().getFullYear()} {BRAND.legalName}. All rights reserved.
           </p>
           <p className="text-earth-600 text-xs">
             Dar es Salaam, Tanzania 🇹🇿

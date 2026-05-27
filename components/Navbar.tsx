@@ -5,6 +5,8 @@ import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FiMenu, FiX } from 'react-icons/fi'
+import BrandLogo from '@/components/BrandLogo'
+import { BRAND } from '@/lib/brand'
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -41,17 +43,8 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="flex items-center justify-between h-[72px] lg:h-20">
 
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="w-10 h-10 bg-gold-400 flex items-center justify-center flex-shrink-0">
-                <span className="font-serif text-earth-900 font-bold text-sm leading-none">MML</span>
-              </div>
-              <div className="hidden sm:block">
-                <div className="font-serif text-cream-100 font-bold text-base tracking-wide leading-tight group-hover:text-gold-400 transition-colors duration-300">
-                  Mary Minza Lucas
-                </div>
-                <div className="text-earth-400 text-[10px] tracking-luxury uppercase">Travel Creator</div>
-              </div>
+            <Link href="/" className="group">
+              <BrandLogo size={40} variant="lockup" className="group-hover:opacity-90 transition-opacity" />
             </Link>
 
             {/* Desktop navigation */}
@@ -163,7 +156,7 @@ export default function Navbar() {
                 transition={{ delay: 0.5 }}
                 className="mt-10 text-earth-500 text-xs tracking-widest uppercase"
               >
-                Tanzania Travel Creator · Est. 2019
+                {BRAND.name} · Tanzania · Est. 2019
               </motion.div>
             </div>
           </motion.div>

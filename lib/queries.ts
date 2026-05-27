@@ -127,7 +127,7 @@ function normalizePackage(pkg: any): TravelPackage {
       ...img,
       imageUrl: img?.asset?.url,
     })),
-    // Only send tiers marked visible (or with no visible field set — legacy)
+    // Only send tiers marked visible (or with no visible field set - legacy)
     pricingTiers: (pkg.pricingTiers || []).filter(
       (t: any) => t.visible !== false
     ),
@@ -304,6 +304,13 @@ export async function getPortfolioSettings(): Promise<PortfolioSettings> {
     heroBgImage ${IMAGE_PROJECTION},
     heroDescription,
     services,
+    insightsHeading,
+    insightsDescription,
+    insightsGallery[] {
+      platform,
+      caption,
+      image ${IMAGE_PROJECTION}
+    },
     pitchDescription,
     pitchBullets,
     testimonials
@@ -315,6 +322,10 @@ export async function getPortfolioSettings(): Promise<PortfolioSettings> {
     heroBgImage: result.heroBgImage
       ? { ...result.heroBgImage, imageUrl: result.heroBgImage?.asset?.url }
       : undefined,
+    insightsGallery: (result.insightsGallery || []).map((item: any) => ({
+      ...item,
+      image: item.image ? { ...item.image, imageUrl: item.image?.asset?.url } : undefined,
+    })),
   }
 }
 

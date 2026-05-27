@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const pkg = await getPackageBySlug(slug)
   if (!pkg) return { title: 'Package Not Found' }
   return {
-    title: `${pkg.title} — Tanzania Travel Package`,
+    title: `${pkg.title}: Tanzania Travel Package`,
     description: pkg.description,
   }
 }

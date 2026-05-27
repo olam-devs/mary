@@ -7,6 +7,8 @@ import Image from 'next/image'
 import { FiArrowDown } from 'react-icons/fi'
 import TypewriterText from './TypewriterText'
 import FloatingOrbs from './FloatingOrbs'
+import BrandLogo from '@/components/BrandLogo'
+import { BRAND } from '@/lib/brand'
 import type { HomepageContent } from '@/lib/types'
 
 const containerVariants = {
@@ -68,14 +70,14 @@ export default function Hero({ content }: HeroProps) {
       >
         <Image
           src={heroImageSrc}
-          alt="Tanzania — Hidden Gems by Mary Minza Lucas"
+        alt={`Tanzania travel by ${BRAND.name}`}
           fill
           priority
           className="object-cover object-center"
           quality={90}
           sizes="100vw"
         />
-        {/* Gradient overlay — left fade so image stays vivid on the right */}
+        {/* Gradient overlay: left fade so image stays vivid on the right */}
         <div className="absolute inset-0 bg-gradient-to-r from-earth-900/90 via-earth-900/50 to-earth-900/10" />
         <div className="absolute inset-0 bg-gradient-to-b from-earth-900/30 via-transparent to-earth-900/60" />
       </motion.div>
@@ -102,19 +104,20 @@ export default function Hero({ content }: HeroProps) {
           </span>
         </motion.div>
 
-        {/* Name */}
-        <motion.h1
-          variants={itemVariants}
-          className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-cream-100 leading-none mb-2"
-        >
-          Mary Minza
-        </motion.h1>
-        <motion.h1
-          variants={itemVariants}
-          className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-gold-400 leading-none mb-10 italic"
-        >
-          Lucas
-        </motion.h1>
+        <motion.div variants={itemVariants} className="flex items-start gap-5 mb-8">
+          <BrandLogo size={56} variant="mark" className="mt-1" />
+          <div>
+            <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-cream-100 leading-none">
+              {BRAND.nameLine1}
+            </h1>
+            <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-gold-400 italic leading-none mt-1">
+              {BRAND.nameLine2}
+            </h1>
+            <p className="text-cream-100/60 text-xs uppercase tracking-luxury mt-3">
+              {BRAND.tagline}
+            </p>
+          </div>
+        </motion.div>
 
         {/* Taglines */}
         <motion.p

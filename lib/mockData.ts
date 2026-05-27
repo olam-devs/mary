@@ -1,6 +1,6 @@
 import type { BlogPost, TravelPackage, PortfolioItem, AboutContent, SiteSettings, HomepageContent, ContactPageContent, PortfolioSettings } from './types'
 
-// Curated Unsplash images — Tanzania / Africa travel aesthetic
+// Curated Unsplash images. Tanzania / Africa travel aesthetic.
 const IMAGES = {
   hero: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=1920&q=85',
   safari1: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1200&q=80',
@@ -67,7 +67,7 @@ export const mockBlogPosts: BlogPost[] = [
     title: 'The Perfect 7-Day Tanzanian Itinerary',
     slug: { current: 'perfect-7-day-tanzania-itinerary' },
     category: 'itineraries',
-    excerpt: 'One week, three regions, zero wasted hours. This itinerary covers Dar es Salaam, Zanzibar, and a quick Kilimanjaro town stop — balanced for first-timers and return visitors.',
+    excerpt: 'One week, three regions, zero wasted hours. This itinerary covers Dar es Salaam, Zanzibar, and a quick Kilimanjaro town stop. Balanced for first-timers and return visitors.',
     mainImage: { asset: { url: IMAGES.zanzibar1 }, alt: 'Tanzania 7-day itinerary', imageUrl: IMAGES.zanzibar1 } as any,
     publishedAt: '2024-09-05T00:00:00.000Z',
     readTime: 15,
@@ -77,7 +77,7 @@ export const mockBlogPosts: BlogPost[] = [
     title: 'Best Boutique Hotels in Zanzibar Under $150/Night',
     slug: { current: 'best-boutique-hotels-zanzibar' },
     category: 'hotels-restaurants',
-    excerpt: 'Forget the over-hyped resort chains. These hidden boutique gems offer authentic Swahili architecture, warm hospitality, and stunning ocean views — without the inflated price tag.',
+    excerpt: 'Forget the over-hyped resort chains. These hidden boutique gems offer authentic Swahili architecture, warm hospitality, and stunning ocean views, without the inflated price tag.',
     mainImage: { asset: { url: IMAGES.hotel1 }, alt: 'Boutique hotel Zanzibar', imageUrl: IMAGES.hotel1 } as any,
     publishedAt: '2024-08-18T00:00:00.000Z',
     readTime: 9,
@@ -87,7 +87,7 @@ export const mockBlogPosts: BlogPost[] = [
     title: 'Moshi to Arusha: A Road Tripper\'s Complete Guide',
     slug: { current: 'moshi-to-arusha-road-trip' },
     category: 'group-travel',
-    excerpt: 'The road between Moshi and Arusha is one of the most scenic in East Africa — if you know where to stop. Here\'s everything from the best roadside nyama choma to Maasai market days.',
+    excerpt: "The road between Moshi and Arusha is one of the most scenic in East Africa, if you know where to stop. Here's everything from the best roadside nyama choma to Maasai market days.",
     mainImage: { asset: { url: IMAGES.kilimanjaro }, alt: 'Kilimanjaro area Tanzania', imageUrl: IMAGES.kilimanjaro } as any,
     publishedAt: '2024-07-25T00:00:00.000Z',
     readTime: 11,
@@ -152,7 +152,7 @@ export const mockPackages: TravelPackage[] = [
     _id: 'pkg-3',
     title: 'Dar es Salaam City & Coast',
     slug: { current: 'dar-es-salaam-city-coast' },
-    description: 'The underrated capital has more soul than any guidebook captures. Two days in Dar\'s buzzing streets — local food markets, coastal villages, boutique hotels, and hidden beaches that only locals know.',
+    description: "The underrated capital has more soul than any guidebook captures. Two days in Dar's buzzing streets: local food markets, coastal villages, boutique hotels, and hidden beaches that only locals know.",
     highlights: ['Local food market tour', 'Bongoyo Island boat trip', 'Kariakoo bazaar experience', 'Sunset at Slipway', 'Boutique hotel stay', 'Private city guide'],
     images: [
       { asset: { url: IMAGES.dares }, alt: 'Dar es Salaam cityscape', imageUrl: IMAGES.dares } as any,
@@ -200,7 +200,7 @@ export const mockPackages: TravelPackage[] = [
     _id: 'pkg-5',
     title: 'Stone Town Heritage & Culture',
     slug: { current: 'stone-town-heritage-culture' },
-    description: 'A full day immersion into Zanzibar\'s UNESCO World Heritage Stone Town — a labyrinth of Arab, Indian, and African history. Private walking tours, spice markets, House of Wonders, and colonial architecture at golden hour.',
+    description: "A full day immersion into Zanzibar's UNESCO World Heritage Stone Town. A labyrinth of Arab, Indian, and African history. Private walking tours, spice markets, House of Wonders, and colonial architecture at golden hour.",
     highlights: ['UNESCO Stone Town walking tour', 'Spice markets & bazaars', 'Palace Museum visit', 'Sunset rooftop dinner', 'Traditional dhow photo tour', 'Expert local guide'],
     images: [
       { asset: { url: IMAGES.stonetown }, alt: 'Stone Town Zanzibar', imageUrl: IMAGES.stonetown } as any,
@@ -230,7 +230,7 @@ export const mockPackages: TravelPackage[] = [
 export const mockPortfolioItems: PortfolioItem[] = [
   {
     _id: 'port-1',
-    title: 'Zanzibar Pearl Resort — Full UGC Campaign',
+    title: 'Zanzibar Pearl Resort: Full UGC Campaign',
     type: 'UGC',
     brand: 'Zanzibar Pearl Resort',
     description: 'A week-long content residency creating authentic visual stories for an award-winning boutique resort. Delivered 45+ photos and 12 reels that increased their Instagram engagement by 340%.',
@@ -266,7 +266,7 @@ export const mockPortfolioItems: PortfolioItem[] = [
   },
   {
     _id: 'port-3',
-    title: 'Social Media Strategy — Bahari Beach Hotel',
+    title: 'Social Media Strategy: Bahari Beach Hotel',
     type: 'Social',
     brand: 'Bahari Beach Hotel',
     description: 'Three-month social media management contract, developing content calendar, shooting monthly content days, and community management. Grew their following from 2,400 to 18,000 in 90 days.',
@@ -283,7 +283,7 @@ export const mockPortfolioItems: PortfolioItem[] = [
   },
   {
     _id: 'port-4',
-    title: 'National Geographic — East Africa Externship',
+    title: 'National Geographic: East Africa Externship',
     type: 'Campaign',
     brand: 'National Geographic',
     description: 'A storytelling externship documenting lesser-known communities in East Africa for National Geographic\'s digital platforms. Focused on authentic human stories behind Tanzania\'s tourism landscape.',
@@ -299,7 +299,7 @@ export const mockPortfolioItems: PortfolioItem[] = [
   },
   {
     _id: 'port-5',
-    title: 'Kilimanjaro Group Trek — Experience Design',
+    title: 'Kilimanjaro Group Trek: Experience Design',
     type: 'Travel',
     brand: 'Independent Project',
     description: 'Curated and led a group travel experience for 12 content creators from across Africa, combining the Kilimanjaro foothills with cultural community visits and a final Zanzibar retreat.',
@@ -326,12 +326,12 @@ export const mockAboutContent: AboutContent = {
   profileImage: { asset: { url: IMAGES.blogger }, alt: 'Mary Minza Lucas', imageUrl: IMAGES.blogger } as any,
   quote: 'Adventure is a right, not a luxury.',
   bioText: [
-    "I'm Mary Minza Lucas — a content creator and social media strategist based in Dar es Salaam, Tanzania. I believe deeply that extraordinary travel experiences shouldn't be reserved only for those with extraordinary budgets.",
+    "I'm Mary Minza Lucas, a content creator and social media strategist based in Dar es Salaam, Tanzania. I believe deeply that extraordinary travel experiences shouldn't be reserved only for those with extraordinary budgets.",
     "My work begins where guidebooks end. I explore the hidden restaurants of Kariakoo, the boutique guesthouses in Stone Town no algorithm has found yet, the waterfalls above Moshi that most visitors drive right past.",
-    "Beyond travel content, I work as a digital marketing strategist for hospitality brands — helping hotels, restaurants, and destinations connect with the modern traveler through authentic narrative, not polished stock photos.",
+    'Beyond travel content, I work as a digital marketing strategist for hospitality brands, helping hotels, restaurants, and destinations connect with the modern traveler through authentic narrative, not polished stock photos.',
   ],
   highlights: [
-    'National Geographic Externship — East Africa',
+    'National Geographic Externship: East Africa',
     'Explored 120+ destinations across Tanzania',
     'Digital marketing for 30+ hospitality brands',
     'Solo, group & curated group travel experiences',
@@ -344,7 +344,7 @@ export const mockAboutContent: AboutContent = {
     },
     {
       title: 'Authentic Restaurants',
-      description: 'From roadside nyama choma to secret rooftop spots — I chase the real flavors of Tanzania, not the tourist menu.',
+      description: 'From roadside nyama choma to secret rooftop spots, I chase the real flavors of Tanzania, not the tourist menu.',
       icon: '🍽️',
     },
     {
@@ -355,7 +355,7 @@ export const mockAboutContent: AboutContent = {
   ],
   forExplorer: {
     heading: 'For the Explorer',
-    body: 'If you\'re planning a trip to Tanzania and don\'t know where to start, I\'m your guide. I create detailed, honest, budget-aware content that helps real travelers make real decisions — not just dream from their couch. From solo itineraries to group adventures, every post is rooted in personal experience.',
+    body: "If you're planning a trip to Tanzania and don't know where to start, I'm your guide. I create detailed, honest, budget-aware content that helps real travelers make real decisions, not just dream from their couch. From solo itineraries to group adventures, every post is rooted in personal experience.",
     image: { asset: { url: IMAGES.travel1 }, alt: 'Tanzania explorer', imageUrl: IMAGES.travel1 } as any,
   },
   forBrand: {
@@ -367,7 +367,7 @@ export const mockAboutContent: AboutContent = {
     {
       year: '2019',
       event: 'The First Step',
-      description: 'Started documenting Dar es Salaam\'s hidden food scene on Instagram — completely unplanned. The response changed everything.',
+      description: "Started documenting Dar es Salaam's hidden food scene on Instagram. Completely unplanned. The response changed everything.",
     },
     {
       year: '2020',
@@ -382,7 +382,7 @@ export const mockAboutContent: AboutContent = {
     {
       year: '2022',
       event: 'National Geographic Externship',
-      description: 'Joined a global storytelling project documenting East African communities — the most transformative creative experience of my career.',
+      description: 'Joined a global storytelling project documenting East African communities. The most transformative creative experience of my career.',
     },
     {
       year: '2023',
@@ -391,7 +391,7 @@ export const mockAboutContent: AboutContent = {
     },
     {
       year: '2024',
-      event: 'Mary Minza Lucas — Fully Launched',
+      event: 'Mary Minza Lucas: Fully Launched',
       description: 'Unified the blog, packages, and portfolio under one brand. Helping travelers explore Tanzania and helping brands tell their story.',
     },
   ],
@@ -419,16 +419,16 @@ export const mockHomepageContent: HomepageContent = {
   aboutHeading: 'The Explorer Behind The Stories',
   aboutQuote: 'Adventure is a right, not a luxury.',
   aboutBody1:
-    'Mary Minza Lucas is a content creator and digital marketing strategist based in Dar es Salaam, Tanzania. She believes extraordinary experiences belong to everyone — not just those with luxury budgets.',
+    'Mary Minza Lucas is a content creator and digital marketing strategist based in Dar es Salaam, Tanzania. She believes extraordinary experiences belong to everyone, not just those with luxury budgets.',
   aboutBody2:
-    'From hidden restaurants in Kariakoo to safari drives in the Serengeti, Mary bridges the gap between travelers who need guidance and brands that need visibility — through authentic storytelling and strategic digital marketing.',
+    'From hidden restaurants in Kariakoo to safari drives in the Serengeti, Mary bridges the gap between travelers who need guidance and brands that need visibility, through authentic storytelling and strategic digital marketing.',
   destinations: [
     'Dar es Salaam', 'Zanzibar', 'Serengeti', 'Moshi', 'Arusha',
     'Kilimanjaro', 'Stone Town', 'Ngorongoro', 'Pemba Island', 'Mikumi',
   ],
   partnershipHeading: "Let's Build Something Worth Sharing",
   partnershipBody:
-    "I collaborate with hotels, restaurants, and destinations that value authentic storytelling. Cinematic UGC, social media strategy, and immersive experience design — all rooted in real Tanzania.",
+    'I collaborate with hotels, restaurants, and destinations that value authentic storytelling. Cinematic UGC, social media strategy, and immersive experience design, all rooted in real Tanzania.',
 }
 
 // ============================================================
@@ -437,12 +437,12 @@ export const mockHomepageContent: HomepageContent = {
 
 export const mockContactPageContent: ContactPageContent = {
   heroDescription:
-    "Whether you're planning a trip, exploring a partnership, or simply want to say hello — Mary personally reads every message.",
+    "Whether you're planning a trip, exploring a partnership, or simply want to say hello. Mary personally reads every message.",
   subDescription:
     'All messages are read personally. For travel bookings, expect a response within 24 hours. For brand partnerships, Mary reviews all inquiries within 2 business days.',
   ctaHeading: 'Planning a Trip?',
   ctaBody:
-    "Skip the form — browse curated packages and use the price calculator to get instant pricing for your group.",
+    'Skip the form. Browse curated packages and use the price calculator to get instant pricing for your group.',
   responseTimes: [
     { category: 'Travel Packages', time: 'Within 24h', description: 'Response for booking inquiries' },
     { category: 'Brand Partnerships', time: '2 Business Days', description: 'Response for collaboration requests' },
@@ -459,30 +459,34 @@ export const mockPortfolioSettings: PortfolioSettings = {
     'I am passionate about collaborating with brands that value authenticity and discovery. By blending cinematic storytelling with strategic digital marketing, I help hotels, restaurants, and destinations increase visibility and connect with modern travelers.',
   services: [
     {
-      icon: '🎬',
+      icon: '🎥',
       title: 'User Generated Content (UGC)',
-      desc: 'Cinematic photos and reels that feel authentic — because they are. Created during real visits, not staged shoots. Perfect for hotels, restaurants, and tourism brands.',
+      desc: 'Cinematic photos and reels that feel authentic, because they are. Created during real visits, not staged shoots. Perfect for hotels, restaurants, and tourism brands.',
       features: ['Reels & short-form video', 'Photography packages', 'Story content', 'Product in context'],
     },
     {
-      icon: '⭐',
+      icon: '📝',
       title: 'Brand Features & Reviews',
-      desc: 'Honest, detailed coverage of your property or experience published across my platforms — reaching an audience of engaged, travel-intent followers.',
+      desc: 'Honest, detailed coverage of your property or experience published across my platforms, reaching an audience of engaged, travel-intent followers.',
       features: ['Long-form blog reviews', 'Social media posts', 'Multi-platform reach', 'SEO-optimized content'],
     },
     {
-      icon: '📱',
+      icon: '📈',
       title: 'Social Media Management',
-      desc: "Full-service social media strategy and execution — from content creation to community management. Transform your brand's online presence in 90 days.",
+      desc: "Full-service social media strategy and execution, from content creation to community management. Transform your brand's online presence in 90 days.",
       features: ['Monthly content calendars', 'Photography & videography', 'Caption writing', 'Analytics reporting'],
     },
     {
-      icon: '✈️',
+      icon: '🧭',
       title: 'Experience Design',
       desc: 'Curated group travel experiences that generate organic content, grow communities, and create lasting brand impressions. From concept to landing.',
       features: ['Influencer group trips', 'Press & media trips', 'Brand immersion retreats', 'Full logistics management'],
     },
   ],
+  insightsHeading: 'Performance & Insights',
+  insightsDescription:
+    'Brands love receipts. Here are real screenshots that show reach, views, and performance across my platforms.',
+  insightsGallery: [],
   pitchDescription:
     "By blending cinematic storytelling with strategic digital marketing, I help hotels, restaurants, and destinations increase visibility and connect with modern travelers who are looking for genuine, memorable experiences.",
   pitchBullets: [
@@ -493,7 +497,7 @@ export const mockPortfolioSettings: PortfolioSettings = {
   ],
   testimonials: [
     {
-      quote: "Mary's content elevated our brand in ways we couldn't have anticipated. Authentic, beautiful, and genuinely engaging — our bookings increased within the same month.",
+      quote: "Mary's content elevated our brand in ways we couldn't have anticipated. Authentic, beautiful, and genuinely engaging. Our bookings increased within the same month.",
       author: 'General Manager',
       brand: 'Zanzibar Boutique Resort',
     },
@@ -514,7 +518,7 @@ export const mockSiteSettings: SiteSettings = {
   siteTitle: 'Mary Minza Lucas',
   tagline: 'Affordable Adventures. Authentic Stories. Hidden Tanzania Revealed.',
   email: 'hello@maryminzalucas.com',
-  whatsapp: '255712345678',
+  whatsapp: '255793356660',
   instagram: 'https://instagram.com/maryminzalucas',
   twitter: 'https://twitter.com/maryminzalucas',
   youtube: 'https://youtube.com/@maryminzalucas',

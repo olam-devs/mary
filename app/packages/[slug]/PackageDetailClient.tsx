@@ -253,11 +253,11 @@ export default function PackageDetailClient({ pkg }: { pkg: TravelPackage }) {
                   <div className="bg-earth-900 p-6 space-y-4">
                     <h3 className="font-serif text-cream-100 font-bold text-lg">Ready to Book?</h3>
                     <p className="text-earth-400 text-xs leading-relaxed">
-                      Bookings are personal — Mary confirms every trip directly. Reach out to check
+                      Bookings are personal. Mary confirms every trip directly. Reach out to check
                       availability and secure your dates.
                     </p>
                     <a
-                      href="https://wa.me/255712345678"
+                      href="https://wa.me/255793356660"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn-primary w-full flex items-center justify-center gap-2"

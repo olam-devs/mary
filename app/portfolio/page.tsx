@@ -6,9 +6,10 @@ import Link from 'next/link'
 import { FiArrowRight, FiExternalLink, FiDownload } from 'react-icons/fi'
 import AnimatedSection, { StaggerContainer, StaggerItem } from '@/components/AnimatedSection'
 import { getAllPortfolioItems, getSiteSettings, getPortfolioSettings } from '@/lib/queries'
+import { BRAND } from '@/lib/brand'
 
 export const metadata: Metadata = {
-  title: 'Portfolio — Brand Partnerships & Creative Work',
+  title: 'Portfolio: Brand Partnerships & Creative Work',
   description:
     'Mary Minza Lucas partners with hotels, restaurants, and destinations to create authentic UGC, manage social media, and tell immersive travel stories. View the portfolio.',
 }
@@ -41,6 +42,9 @@ export default async function PortfolioPage() {
   const mediaKitUrl = settings.mediaKit?.asset?.url
   const heroDescription = portfolioData.heroDescription
   const services = portfolioData.services ?? []
+  const insightsHeading = portfolioData.insightsHeading
+  const insightsDescription = portfolioData.insightsDescription
+  const insightsGallery = portfolioData.insightsGallery ?? []
   const pitchDescription = portfolioData.pitchDescription
   const pitchBullets = portfolioData.pitchBullets ?? []
   const testimonials = portfolioData.testimonials ?? []
@@ -54,7 +58,7 @@ export default async function PortfolioPage() {
         <div className="absolute inset-0 z-0">
           <Image
             src={portfolioData.heroBgImage?.imageUrl || DEFAULT_HERO_BG}
-            alt="Partnership with MaryMinza"
+            alt={`Partnership with ${BRAND.name}`}
             fill
             priority
             className="object-cover object-center"
@@ -69,7 +73,7 @@ export default async function PortfolioPage() {
               Partnership with
             </h1>
             <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-gold-400 italic leading-tight mb-10">
-              MaryMinza
+              {BRAND.name}
             </h1>
             <div className="divider-gold max-w-20 mx-auto mb-8" />
             <p className="text-cream-100 text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-10 font-semibold">
@@ -132,6 +136,64 @@ export default async function PortfolioPage() {
       </section>
 
       {/* ============================
+          INSIGHTS / SOCIAL PROOF
+      ============================ */}
+      {insightsGallery.length > 0 && (
+        <section className="py-24 bg-sand-100">
+          <div className="max-w-screen-2xl mx-auto px-6 lg:px-10">
+            <AnimatedSection className="text-center mb-16">
+              <p className="label-earth mb-4">Social Proof</p>
+              <h2 className="section-title">
+                {insightsHeading || 'Performance'}<br />
+                <span className="text-gold-500 italic">Insights</span>
+              </h2>
+              {insightsDescription && (
+                <p className="text-earth-600 text-base leading-relaxed max-w-2xl mx-auto mt-6">
+                  {insightsDescription}
+                </p>
+              )}
+            </AnimatedSection>
+
+            <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8" staggerChildren={0.08}>
+              {insightsGallery.map((item, i) => {
+                const imageUrl = item.image?.imageUrl || item.image?.asset?.url
+                const alt = item.caption || `${item.platform || 'Social'} insights screenshot ${i + 1}`
+                if (!imageUrl) return null
+
+                return (
+                  <StaggerItem key={`${item.caption ?? 'insight'}-${i}`}>
+                    <div className="bg-white shadow-card overflow-hidden">
+                      <div className="relative aspect-[4/3] bg-cream-100">
+                        <Image
+                          src={imageUrl}
+                          alt={alt}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 1024px) 100vw, 33vw"
+                        />
+                      </div>
+                      <div className="p-6">
+                        <div className="flex items-center justify-between gap-4">
+                          <p className="text-earth-900 font-semibold text-sm">
+                            {item.caption || 'Insights'}
+                          </p>
+                          {item.platform && (
+                            <span className="text-[10px] uppercase tracking-widest text-earth-400">
+                              {item.platform}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </StaggerItem>
+                )
+              })}
+            </StaggerContainer>
+          </div>
+        </section>
+      )}
+
+      {/* ============================
           PORTFOLIO GRID
       ============================ */}
       <section className="py-24 bg-sand-100">
@@ -159,7 +221,7 @@ export default async function PortfolioPage() {
                 <AnimatedSection key={item._id} delay={0.05 * (i % 4)}>
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 shadow-luxury overflow-hidden bg-white">
 
-                    {/* Content — always LEFT */}
+                    {/* Content - always LEFT */}
                     <div className="p-10 lg:p-14 flex flex-col justify-center">
                       <span className={`self-start text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 mb-4 ${badgeClass}`}>
                         {typeLabel}
@@ -200,7 +262,7 @@ export default async function PortfolioPage() {
                       )}
                     </div>
 
-                    {/* Image — always RIGHT */}
+                    {/* Image - always RIGHT */}
                     <div className="relative aspect-video lg:aspect-auto min-h-[320px] overflow-hidden bg-earth-100">
                       {imageUrl ? (
                         <Image

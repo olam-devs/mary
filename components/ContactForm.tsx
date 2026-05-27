@@ -32,7 +32,7 @@ export default function ContactForm() {
     e.preventDefault()
     setStatus('sending')
 
-    // Simulated submission — replace with your API endpoint or Sanity mutation
+    // Simulated submission. Replace with your API endpoint or Sanity mutation.
     try {
       await new Promise((res) => setTimeout(res, 1800))
       setStatus('success')
@@ -192,7 +192,7 @@ export default function ContactForm() {
           <p className="text-earth-400 text-xs text-center">
             Prefer WhatsApp?{' '}
             <a
-              href="https://wa.me/255712345678"
+              href="https://wa.me/255793356660"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gold-500 hover:underline"

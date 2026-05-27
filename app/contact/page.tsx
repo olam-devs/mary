@@ -16,7 +16,7 @@ import AnimatedSection, { StaggerContainer, StaggerItem } from '@/components/Ani
 import { getContactPageContent, getSiteSettings } from '@/lib/queries'
 
 export const metadata: Metadata = {
-  title: 'Contact Mary Minza Lucas — Bookings & Partnerships',
+  title: 'Contact Mary Minza Lucas: Bookings & Partnerships',
   description:
     'Get in touch with Mary Minza Lucas for travel package bookings, brand partnerships, social media management, or any Tanzania travel questions.',
 }
@@ -29,7 +29,7 @@ export default async function ContactPage() {
     getSiteSettings(),
   ])
 
-  const whatsappNumber = settings.whatsapp ?? '255712345678'
+  const whatsappNumber = settings.whatsapp ?? '255793356660'
   const email = settings.email ?? 'hello@maryminzalucas.com'
   const instagram = settings.instagram ?? 'https://instagram.com/maryminzalucas'
   const twitter = settings.twitter ?? 'https://twitter.com/maryminzalucas'
@@ -69,7 +69,7 @@ export default async function ContactPage() {
             </h1>
             <p className="text-cream-100 text-base md:text-lg max-w-xl mx-auto leading-relaxed font-semibold">
               {content.heroDescription ??
-                "Whether you're planning a trip, exploring a partnership, or simply want to say hello — Mary personally reads every message."}
+                "Whether you're planning a trip, exploring a partnership, or simply want to say hello. Mary personally reads every message."}
             </p>
           </AnimatedSection>
         </div>
@@ -185,7 +185,7 @@ export default async function ContactPage() {
                 </h3>
                 <p className="text-earth-900/70 text-sm leading-relaxed mb-5">
                   {content.ctaBody ??
-                    "Skip the form — browse curated packages and use the price calculator to get instant pricing for your group."}
+                    'Skip the form. Browse curated packages and use the price calculator to get instant pricing for your group.'}
                 </p>
                 <Link href="/packages" className="btn-secondary text-xs">
                   Browse Travel Packages →

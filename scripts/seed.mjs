@@ -1,5 +1,5 @@
 /**
- * Seed script — pushes all sample content to Sanity
+ * Seed script. Pushes all sample content to Sanity.
  * Run: node scripts/seed.mjs
  */
 
@@ -73,7 +73,7 @@ const blogPosts = [
     title: 'The Perfect 7-Day Tanzanian Itinerary',
     slug: { _type: 'slug', current: 'perfect-7-day-tanzania-itinerary' },
     category: 'itineraries',
-    excerpt: 'One week, three regions, zero wasted hours. This itinerary covers Dar es Salaam, Zanzibar, and a quick Kilimanjaro town stop — balanced for first-timers and return visitors.',
+    excerpt: 'One week, three regions, zero wasted hours. This itinerary covers Dar es Salaam, Zanzibar, and a quick Kilimanjaro town stop. Balanced for first-timers and return visitors.',
     publishedAt: '2024-09-05T00:00:00.000Z',
     featured: false,
     readTime: 15,
@@ -95,7 +95,7 @@ const blogPosts = [
     title: "Moshi to Arusha: A Road Tripper's Complete Guide",
     slug: { _type: 'slug', current: 'moshi-to-arusha-road-trip' },
     category: 'group-travel',
-    excerpt: "The road between Moshi and Arusha is one of the most scenic in East Africa — if you know where to stop. Here's everything from the best roadside nyama choma to Maasai market days.",
+    excerpt: "The road between Moshi and Arusha is one of the most scenic in East Africa, if you know where to stop. Here's everything from the best roadside nyama choma to Maasai market days.",
     publishedAt: '2024-07-25T00:00:00.000Z',
     featured: false,
     readTime: 11,
@@ -152,7 +152,7 @@ const packages = [
     _type: 'travelPackage',
     title: 'Dar es Salaam City and Coast',
     slug: { _type: 'slug', current: 'dar-es-salaam-city-coast' },
-    description: "The underrated capital has more soul than any guidebook captures. Two days in Dar's buzzing streets — local food markets, coastal villages, boutique hotels, and hidden beaches that only locals know.",
+    description: "The underrated capital has more soul than any guidebook captures. Two days in Dar's buzzing streets: local food markets, coastal villages, boutique hotels, and hidden beaches that only locals know.",
     highlights: ['Local food market tour', 'Bongoyo Island boat trip', 'Kariakoo bazaar experience', 'Sunset at Slipway', 'Boutique hotel stay', 'Private city guide'],
     location: 'Dar es Salaam, Tanzania',
     duration: '2 Days / 1 Night',
@@ -192,7 +192,7 @@ const packages = [
     _type: 'travelPackage',
     title: 'Stone Town Heritage and Culture',
     slug: { _type: 'slug', current: 'stone-town-heritage-culture' },
-    description: "A full day immersion into Zanzibar's UNESCO World Heritage Stone Town — a labyrinth of Arab, Indian, and African history. Private walking tours, spice markets, House of Wonders, and colonial architecture at golden hour.",
+    description: "A full day immersion into Zanzibar's UNESCO World Heritage Stone Town. A labyrinth of Arab, Indian, and African history. Private walking tours, spice markets, House of Wonders, and colonial architecture at golden hour.",
     highlights: ['UNESCO Stone Town walking tour', 'Spice markets and bazaars', 'Palace Museum visit', 'Sunset rooftop dinner', 'Traditional dhow photo tour', 'Expert local guide'],
     location: 'Stone Town, Zanzibar',
     duration: '1 Day Full Day',
@@ -217,7 +217,7 @@ const portfolio = [
   {
     _id: 'portfolio-001',
     _type: 'portfolioItem',
-    title: 'Zanzibar Pearl Resort — Full UGC Campaign',
+    title: 'Zanzibar Pearl Resort: Full UGC Campaign',
     type: 'UGC',
     brand: 'Zanzibar Pearl Resort',
     description: 'A week-long content residency creating authentic visual stories for an award-winning boutique resort. Delivered 45+ photos and 12 reels that increased their Instagram engagement by 340%.',
@@ -247,7 +247,7 @@ const portfolio = [
   {
     _id: 'portfolio-003',
     _type: 'portfolioItem',
-    title: 'Social Media Strategy — Bahari Beach Hotel',
+    title: 'Social Media Strategy: Bahari Beach Hotel',
     type: 'Social',
     brand: 'Bahari Beach Hotel',
     description: 'Three-month social media management contract, developing content calendar, shooting monthly content days, and community management. Grew their following from 2,400 to 18,000 in 90 days.',
@@ -262,7 +262,7 @@ const portfolio = [
   {
     _id: 'portfolio-004',
     _type: 'portfolioItem',
-    title: 'National Geographic — East Africa Externship',
+    title: 'National Geographic: East Africa Externship',
     type: 'Campaign',
     brand: 'National Geographic',
     description: "A storytelling externship documenting lesser-known communities in East Africa for National Geographic's digital platforms. Focused on authentic human stories behind Tanzania's tourism landscape.",
@@ -276,7 +276,7 @@ const portfolio = [
   {
     _id: 'portfolio-005',
     _type: 'portfolioItem',
-    title: 'Kilimanjaro Group Trek — Experience Design',
+    title: 'Kilimanjaro Group Trek: Experience Design',
     type: 'Travel',
     brand: 'Independent Project',
     description: 'Curated and led a group travel experience for 12 content creators from across Africa, combining the Kilimanjaro foothills with cultural community visits and a final Zanzibar retreat.',
@@ -302,24 +302,24 @@ const singletons = [
     quote: 'Adventure is a right, not a luxury.',
     beliefs: [
       { _key: 'b1', icon: '🌍', title: 'Affordable Adventures', description: "Proving that extraordinary experiences don't require extraordinary budgets. Every hidden gem I find, I share." },
-      { _key: 'b2', icon: '🍽️', title: 'Authentic Restaurants', description: 'From roadside nyama choma to secret rooftop spots — I chase the real flavors of Tanzania, not the tourist menu.' },
+      { _key: 'b2', icon: '🍽️', title: 'Authentic Restaurants', description: 'From roadside nyama choma to secret rooftop spots, I chase the real flavors of Tanzania, not the tourist menu.' },
       { _key: 'b3', icon: '🏨', title: 'Boutique Hotels', description: 'Small properties with soul. The kind of places where the host knows your name and the walls tell stories.' },
     ],
     forExplorer: {
       heading: 'For the Explorer',
-      body: "If you're planning a trip to Tanzania and don't know where to start, I'm your guide. I create detailed, honest, budget-aware content that helps real travelers make real decisions — not just dream from their couch.",
+      body: "If you're planning a trip to Tanzania and don't know where to start, I'm your guide. I create detailed, honest, budget-aware content that helps real travelers make real decisions, not just dream from their couch.",
     },
     forBrand: {
       heading: 'For the Brand',
       body: 'I bridge the gap between businesses that need visibility and travelers who need guidance. Through cinematic content creation, strategic social media management, and authentic storytelling, I help hotels, restaurants, and destinations connect with modern, discerning travelers.',
     },
     timeline: [
-      { _key: 't1', year: '2019', event: 'The First Step', description: "Started documenting Dar es Salaam's hidden food scene on Instagram — completely unplanned. The response changed everything." },
+      { _key: 't1', year: '2019', event: 'The First Step', description: "Started documenting Dar es Salaam's hidden food scene on Instagram. Completely unplanned. The response changed everything." },
       { _key: 't2', year: '2020', event: 'Solo Across Tanzania', description: 'Traveled solo through Moshi, Arusha, and Zanzibar during the quietest travel year in history. Found the beauty in empty places.' },
       { _key: 't3', year: '2021', event: 'First Brand Partnership', description: 'Collaborated with a boutique Zanzibar resort, producing their first professional UGC campaign. The beginning of a new chapter.' },
-      { _key: 't4', year: '2022', event: 'National Geographic Externship', description: 'Joined a global storytelling project documenting East African communities — the most transformative creative experience of my career.' },
+      { _key: 't4', year: '2022', event: 'National Geographic Externship', description: 'Joined a global storytelling project documenting East African communities. The most transformative creative experience of my career.' },
       { _key: 't5', year: '2023', event: 'Digital Strategy Agency', description: 'Launched a full-service social media management arm, working with 5+ hospitality clients simultaneously across Tanzania.' },
-      { _key: 't6', year: '2024', event: 'Mary Minza Lucas — Fully Launched', description: 'Unified the blog, packages, and portfolio under one brand. Helping travelers explore Tanzania and helping brands tell their story.' },
+      { _key: 't6', year: '2024', event: 'Mary Minza Lucas: Fully Launched', description: 'Unified the blog, packages, and portfolio under one brand. Helping travelers explore Tanzania and helping brands tell their story.' },
     ],
     stats: [
       { _key: 's1', value: '50K+', label: 'Social Followers' },
@@ -334,7 +334,7 @@ const singletons = [
     siteTitle: 'Mary Minza Lucas',
     tagline: 'Affordable Adventures. Authentic Stories. Hidden Tanzania Revealed.',
     email: 'hello@maryminzalucas.com',
-    whatsapp: '255712345678',
+    whatsapp: '255793356660',
     instagram: 'https://instagram.com/maryminzalucas',
     twitter: 'https://twitter.com/maryminzalucas',
     youtube: 'https://youtube.com/@maryminzalucas',
@@ -368,7 +368,7 @@ async function seed() {
 
   console.log('\n✅ All documents seeded successfully!')
   console.log(`\n📖 Open Sanity Studio at http://localhost:3000/studio to manage content.`)
-  console.log(`🌐 Your site is ready — run: npm run dev\n`)
+  console.log(`🌐 Your site is ready. Run: npm run dev\n`)
 }
 
 seed().catch((err) => {

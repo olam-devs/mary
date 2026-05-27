@@ -8,7 +8,7 @@ const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!
 
 export default defineConfig({
   name: 'mary-minza-lucas-studio',
-  title: 'Mary Minza Lucas — Studio',
+  title: 'Mary Minza Lucas: Studio',
   basePath: '/studio',
   projectId,
   dataset,

@@ -8,14 +8,14 @@ export default defineType({
     // ── Hero ──
     defineField({
       name: 'heroBgImage',
-      title: 'Hero — Background Image',
+      title: 'Hero: Background Image',
       type: 'image',
       description: 'Full-width background image behind the hero text',
       options: { hotspot: true },
     }),
     defineField({
       name: 'quote',
-      title: 'Hero — Personal Quote',
+      title: 'Hero: Personal Quote',
       type: 'string',
       initialValue: 'Adventure is a right, not a luxury.',
     }),
@@ -23,7 +23,7 @@ export default defineType({
     // ── Who I Am section ──
     defineField({
       name: 'profileImage',
-      title: '"Who I Am" — Profile Photo',
+      title: '"Who I Am": Profile Photo',
       description: 'Photo shown in the left column of the "Who I Am" section',
       type: 'image',
       options: { hotspot: true },
@@ -31,14 +31,14 @@ export default defineType({
     }),
     defineField({
       name: 'bioText',
-      title: '"Who I Am" — Biography Paragraphs',
+      title: '"Who I Am": Biography Paragraphs',
       description: 'Each item is one paragraph. Add up to 4.',
       type: 'array',
       of: [{ type: 'text' }],
     }),
     defineField({
       name: 'highlights',
-      title: '"Who I Am" — Highlight Bullet Points',
+      title: '"Who I Am": Highlight Bullet Points',
       description: 'The checkmark list (achievements, credentials)',
       type: 'array',
       of: [{ type: 'string' }],

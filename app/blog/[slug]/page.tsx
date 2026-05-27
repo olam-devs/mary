@@ -11,6 +11,8 @@ import BlogCard from '@/components/BlogCard'
 import ReadingProgress from '@/components/ReadingProgress'
 import { getBlogPostBySlug, getAllBlogPosts } from '@/lib/queries'
 import { categoryLabels } from '@/lib/types'
+import BrandLogo from '@/components/BrandLogo'
+import { BRAND } from '@/lib/brand'
 
 interface PostPageProps {
   params: Promise<{ slug: string }>
@@ -167,7 +169,7 @@ export default async function BlogPostPage({ params }: PostPageProps) {
                   <FiClock size={13} /> {post.readTime} min read
                 </span>
               )}
-              <span className="flex items-center gap-1.5">By Mary Minza Lucas</span>
+              <span className="flex items-center gap-1.5">By {BRAND.name}</span>
             </div>
           </AnimatedSection>
         </div>
@@ -215,12 +217,10 @@ export default async function BlogPostPage({ params }: PostPageProps) {
 
           {/* Author card */}
           <div className="mt-12 bg-earth-900 p-8 flex flex-col sm:flex-row items-center gap-6">
-            <div className="w-20 h-20 bg-gold-400 flex-shrink-0 flex items-center justify-center">
-              <span className="font-serif text-earth-900 font-bold text-xl">MML</span>
-            </div>
+            <BrandLogo size={72} variant="mark" className="flex-shrink-0" />
             <div>
               <p className="text-gold-400 text-xs uppercase tracking-widest mb-1">Written by</p>
-              <h4 className="font-serif text-cream-100 font-bold text-xl mb-2">Mary Minza Lucas</h4>
+              <h4 className="font-serif text-cream-100 font-bold text-xl mb-2">{BRAND.name}</h4>
               <p className="text-earth-300 text-sm leading-relaxed">
                 Travel content creator and digital marketing strategist based in Dar es Salaam.
                 Exploring hidden Tanzania so you don't have to start from scratch.

@@ -7,20 +7,20 @@ export default defineType({
   fields: [
     defineField({
       name: 'heroBgImage',
-      title: 'Hero — Background Image',
+      title: 'Hero: Background Image',
       type: 'image',
       description: 'Full-width background image behind the blog hero',
       options: { hotspot: true },
     }),
     defineField({
       name: 'heroTitle',
-      title: 'Hero — Title',
+      title: 'Hero: Title',
       type: 'string',
       initialValue: 'The Blog',
     }),
     defineField({
       name: 'heroDescription',
-      title: 'Hero — Description',
+      title: 'Hero: Description',
       type: 'text',
       rows: 3,
       initialValue:

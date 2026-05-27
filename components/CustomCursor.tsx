@@ -47,7 +47,7 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* Outer ring — lags behind for a trailing feel */}
+      {/* Outer ring: lags behind for a trailing feel */}
       <motion.div
         className="fixed top-0 left-0 pointer-events-none z-[9998] rounded-full border border-gold-400"
         style={{ width: 36, height: 36, marginLeft: -18, marginTop: -18 }}
@@ -59,7 +59,7 @@ export default function CustomCursor() {
         }}
         transition={{ type: 'spring', stiffness: 150, damping: 22, mass: 0.6 }}
       />
-      {/* Inner dot — snaps instantly */}
+      {/* Inner dot: snaps instantly */}
       <motion.div
         className="fixed top-0 left-0 pointer-events-none z-[9999] rounded-full bg-gold-400"
         style={{ width: 8, height: 8, marginLeft: -4, marginTop: -4 }}

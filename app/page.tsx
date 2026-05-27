@@ -12,11 +12,12 @@ import MarqueeStrip from '@/components/MarqueeStrip'
 import AnimatedCounter from '@/components/AnimatedCounter'
 import FloatingOrbs from '@/components/FloatingOrbs'
 import { getFeaturedBlogPosts, getFeaturedPackages, getHomepageContent } from '@/lib/queries'
+import { BRAND } from '@/lib/brand'
 
 export const metadata: Metadata = {
-  title: 'Mary Minza Lucas | Tanzania Travel Creator & Digital Marketing Strategist',
+  title: `${BRAND.name} | Tanzania Safari & Travel`,
   description:
-    'Affordable Adventures. Authentic Stories. Hidden Tanzania Revealed. Explore Tanzania through Mary Minza Lucas — travel blog, packages, and brand partnerships.',
+    `${BRAND.motto} Explore Tanzania through ${BRAND.name}: safari packages, travel blog, and brand partnerships.`,
 }
 
 const DEFAULT_PARTNER_BG = 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=1920&q=75'
@@ -48,76 +49,6 @@ export default async function HomePage() {
           MARQUEE STRIP
       ============================ */}
       <MarqueeStrip />
-
-      {/* ============================
-          FEATURED BLOG POSTS
-      ============================ */}
-      <section className="py-24 lg:py-32 bg-cream-100">
-        <div className="max-w-screen-2xl mx-auto px-6 lg:px-10">
-          <AnimatedSection className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-16">
-            <div>
-              <p className="label-gold mb-3">From the Blog</p>
-              <h2 className="section-title">
-                Stories From<br />
-                <span className="text-gold-500 italic">The Field</span>
-              </h2>
-            </div>
-            <Link href="/blog" className="btn-outline-dark text-xs self-start sm:self-auto flex-shrink-0">
-              View All Posts <FiArrowRight className="inline ml-1" size={13} />
-            </Link>
-          </AnimatedSection>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredPosts.map((post, i) => (
-              <BlogCard key={post._id} post={post} index={i} />
-            ))}
-          </div>
-
-          <AnimatedSection delay={0.2} className="mt-20 max-w-3xl mx-auto text-center">
-            <blockquote className="font-serif text-earth-700 text-xl md:text-2xl italic leading-relaxed border-l-4 border-gold-400 pl-8 text-left">
-              "Tanzania is full of secrets and I'm here to share them. I go beyond postcards to bring
-              you detailed guides on hidden hotels, local restaurants, and budget-friendly itineraries."
-            </blockquote>
-            <p className="text-earth-400 text-xs uppercase tracking-widest mt-4 pl-8">— Mary Minza Lucas</p>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* ============================
-          FEATURED PACKAGES
-      ============================ */}
-      <section className="relative py-24 lg:py-32 bg-earth-900 overflow-hidden">
-        <FloatingOrbs />
-        <div className="relative z-10 max-w-screen-2xl mx-auto px-6 lg:px-10">
-          <AnimatedSection className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-16">
-            <div>
-              <p className="label-gold mb-3">Curated Experiences</p>
-              <h2 className="section-title-light">
-                Travel Packages<br />
-                <span className="text-gold-400 italic">Crafted By Mary</span>
-              </h2>
-            </div>
-            <Link href="/packages" className="btn-gold-outline text-xs self-start sm:self-auto flex-shrink-0">
-              All Packages <FiArrowRight className="inline ml-1" size={13} />
-            </Link>
-          </AnimatedSection>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredPackages.map((pkg, i) => (
-              <PackageCard key={pkg._id} pkg={pkg} index={i} />
-            ))}
-          </div>
-
-          <AnimatedSection delay={0.3} className="text-center mt-14">
-            <p className="text-earth-400 text-sm mb-6">
-              All packages include Mary's personal curation — no generic tours.
-            </p>
-            <Link href="/contact" className="btn-primary">
-              Request a Custom Trip
-            </Link>
-          </AnimatedSection>
-        </div>
-      </section>
 
       {/* ============================
           ABOUT PREVIEW
@@ -165,12 +96,12 @@ export default async function HomePage() {
 
               <p className="text-earth-600 text-base leading-8 mb-6">
                 {home.aboutBody1 ??
-                  'Mary Minza Lucas is a content creator and digital marketing strategist based in Dar es Salaam, Tanzania. She believes extraordinary experiences belong to everyone — not just those with luxury budgets.'}
+                  'Mary Minza Lucas is a content creator and digital marketing strategist based in Dar es Salaam, Tanzania. She believes extraordinary experiences belong to everyone, not just those with luxury budgets.'}
               </p>
 
               <p className="text-earth-600 text-base leading-8 mb-10">
                 {home.aboutBody2 ??
-                  'From hidden restaurants in Kariakoo to safari drives in the Serengeti, Mary bridges the gap between travelers who need guidance and brands that need visibility — through authentic storytelling and strategic digital marketing.'}
+                  'From hidden restaurants in Kariakoo to safari drives in the Serengeti, Mary bridges the gap between travelers who need guidance and brands that need visibility, through authentic storytelling and strategic digital marketing.'}
               </p>
 
               <StaggerContainer className="grid grid-cols-3 gap-6 mb-10" staggerChildren={0.1}>
@@ -193,6 +124,76 @@ export default async function HomePage() {
               </Link>
             </AnimatedSection>
           </div>
+        </div>
+      </section>
+
+      {/* ============================
+          FEATURED BLOG POSTS
+      ============================ */}
+      <section className="py-24 lg:py-32 bg-earth-900">
+        <div className="max-w-screen-2xl mx-auto px-6 lg:px-10">
+          <AnimatedSection className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-16">
+            <div>
+              <p className="label-gold mb-3">From the Blog</p>
+              <h2 className="section-title-light">
+                Stories From<br />
+                <span className="text-gold-400 italic">The Field</span>
+              </h2>
+            </div>
+            <Link href="/blog" className="btn-gold-outline text-xs self-start sm:self-auto flex-shrink-0">
+              View All Posts <FiArrowRight className="inline ml-1" size={13} />
+            </Link>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredPosts.map((post, i) => (
+              <BlogCard key={post._id} post={post} index={i} />
+            ))}
+          </div>
+
+          <AnimatedSection delay={0.2} className="mt-20 max-w-3xl mx-auto text-center">
+            <blockquote className="font-serif text-cream-100/80 text-xl md:text-2xl italic leading-relaxed border-l-4 border-gold-400 pl-8 text-left">
+              "Tanzania is full of secrets and I'm here to share them. I go beyond postcards to bring
+              you detailed guides on hidden hotels, local restaurants, and budget-friendly itineraries."
+            </blockquote>
+            <p className="text-earth-400 text-xs uppercase tracking-widest mt-4 pl-8">{BRAND.name}</p>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* ============================
+          FEATURED PACKAGES
+      ============================ */}
+      <section className="py-24 lg:py-32 bg-cream-100 overflow-hidden">
+        <FloatingOrbs />
+        <div className="relative z-10 max-w-screen-2xl mx-auto px-6 lg:px-10">
+          <AnimatedSection className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-16">
+            <div>
+              <p className="label-gold mb-3">Curated Experiences</p>
+              <h2 className="section-title">
+                Travel Packages<br />
+                <span className="text-gold-500 italic">Crafted By Mary</span>
+              </h2>
+            </div>
+            <Link href="/packages" className="btn-outline-dark text-xs self-start sm:self-auto flex-shrink-0">
+              All Packages <FiArrowRight className="inline ml-1" size={13} />
+            </Link>
+          </AnimatedSection>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredPackages.map((pkg, i) => (
+              <PackageCard key={pkg._id} pkg={pkg} index={i} />
+            ))}
+          </div>
+
+          <AnimatedSection delay={0.3} className="text-center mt-14">
+            <p className="text-earth-600 text-sm mb-6">
+              All packages include Mary's personal curation. No generic tours.
+            </p>
+            <Link href="/contact" className="btn-secondary">
+              Request a Custom Trip
+            </Link>
+          </AnimatedSection>
         </div>
       </section>
 
@@ -255,7 +256,7 @@ export default async function HomePage() {
             <div className="divider-gold max-w-24 mx-auto mb-8" />
             <p className="text-cream-100/75 text-base md:text-lg leading-relaxed max-w-2xl mx-auto mb-12">
               {home.partnershipBody ??
-                "I collaborate with hotels, restaurants, and destinations that value authentic storytelling. Cinematic UGC, social media strategy, and immersive experience design — all rooted in real Tanzania."}
+                'I collaborate with hotels, restaurants, and destinations that value authentic storytelling. Cinematic UGC, social media strategy, and immersive experience design, all rooted in real Tanzania.'}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/portfolio" className="btn-primary min-w-[180px]">

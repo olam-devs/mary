@@ -29,7 +29,7 @@ export default function AnimatedCounter({
       if (!startTime) startTime = timestamp
       const elapsed = (timestamp - startTime) / (duration * 1000)
       const progress = Math.min(elapsed, 1)
-      // easeOutExpo curve — fast at start, slows to final value
+      // easeOutExpo curve: fast at start, slows to final value
       const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress)
       setCount(Math.round(eased * end))
       if (progress < 1) requestAnimationFrame(step)

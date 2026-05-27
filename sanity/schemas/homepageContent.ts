@@ -8,27 +8,27 @@ export default defineType({
     // ── Hero ──
     defineField({
       name: 'heroEyebrow',
-      title: 'Hero — Location Tag',
+      title: 'Hero: Location Tag',
       type: 'string',
       description: 'Small text above the name (e.g. "Dar es Salaam, Tanzania")',
       initialValue: 'Dar es Salaam, Tanzania',
     }),
     defineField({
       name: 'heroTagline1',
-      title: 'Hero — Tagline Line 1',
+      title: 'Hero: Tagline Line 1',
       type: 'string',
       initialValue: 'Affordable Adventures. Authentic Stories.',
     }),
     defineField({
       name: 'heroTagline2',
-      title: 'Hero — Tagline Line 2',
+      title: 'Hero: Tagline Line 2',
       type: 'string',
       description: 'Appears before the rotating destination word. E.g. "Hidden [Serengeti] Revealed."',
       initialValue: 'Revealed.',
     }),
     defineField({
       name: 'heroImage',
-      title: 'Hero — Background Image',
+      title: 'Hero: Background Image',
       type: 'image',
       description: 'Main homepage hero background. Leave blank to use the default photo.',
       options: { hotspot: true },
@@ -37,7 +37,7 @@ export default defineType({
     // ── Stats bar ──
     defineField({
       name: 'stats',
-      title: 'Hero — Stats Bar',
+      title: 'Hero: Stats Bar',
       type: 'array',
       description: 'Numbers shown at the bottom of the hero (e.g. 50K+ Followers)',
       of: [
@@ -61,25 +61,25 @@ export default defineType({
     // ── About preview ──
     defineField({
       name: 'aboutHeading',
-      title: 'About Preview — Heading',
+      title: 'About Preview: Heading',
       type: 'string',
       initialValue: 'The Explorer Behind The Stories',
     }),
     defineField({
       name: 'aboutQuote',
-      title: 'About Preview — Pull Quote',
+      title: 'About Preview: Pull Quote',
       type: 'string',
       initialValue: 'Adventure is a right, not a luxury.',
     }),
     defineField({
       name: 'aboutBody1',
-      title: 'About Preview — Paragraph 1',
+      title: 'About Preview: Paragraph 1',
       type: 'text',
       rows: 3,
     }),
     defineField({
       name: 'aboutBody2',
-      title: 'About Preview — Paragraph 2',
+      title: 'About Preview: Paragraph 2',
       type: 'text',
       rows: 3,
     }),
@@ -96,19 +96,19 @@ export default defineType({
     // ── Partnership CTA ──
     defineField({
       name: 'partnershipHeading',
-      title: 'Partnership CTA — Heading',
+      title: 'Partnership CTA: Heading',
       type: 'string',
       initialValue: "Let's Build Something Worth Sharing",
     }),
     defineField({
       name: 'partnershipBody',
-      title: 'Partnership CTA — Body',
+      title: 'Partnership CTA: Body',
       type: 'text',
       rows: 3,
     }),
     defineField({
       name: 'partnershipBgImage',
-      title: 'Partnership CTA — Background Image',
+      title: 'Partnership CTA: Background Image',
       type: 'image',
       options: { hotspot: true },
     }),

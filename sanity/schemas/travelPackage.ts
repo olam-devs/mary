@@ -78,8 +78,8 @@ export default defineType({
       description: 'Currency used for all pricing tiers in this package.',
       options: {
         list: [
-          { title: 'USD — US Dollar ($)', value: 'USD' },
-          { title: 'TSh — Tanzanian Shilling', value: 'TSh' },
+          { title: 'USD: US Dollar ($)', value: 'USD' },
+          { title: 'TSh: Tanzanian Shilling', value: 'TSh' },
         ],
         layout: 'radio',
       },
@@ -90,7 +90,7 @@ export default defineType({
       name: 'pricingTiers',
       title: 'Pricing Tiers',
       type: 'array',
-      description: 'Add tiers for different group sizes. Toggle "Show on website" to control which tiers are public — hidden tiers stay in Sanity for reference only.',
+    description: 'Add tiers for different group sizes. Toggle "Show on website" to control which tiers are public. Hidden tiers stay in Sanity for reference only.',
       of: [
         {
           type: 'object',

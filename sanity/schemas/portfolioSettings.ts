@@ -8,14 +8,14 @@ export default defineType({
     // ── Hero ──
     defineField({
       name: 'heroBgImage',
-      title: 'Hero — Background Image',
+      title: 'Hero: Background Image',
       type: 'image',
       description: 'Full-width background image behind the portfolio hero',
       options: { hotspot: true },
     }),
     defineField({
       name: 'heroDescription',
-      title: 'Hero — Description (Bold)',
+      title: 'Hero: Description (Bold)',
       type: 'text',
       rows: 3,
       description: 'The bold paragraph shown in the hero section and in the pitch section.',
@@ -52,10 +52,70 @@ export default defineType({
       ],
     }),
 
+    // ── Social Proof / Insights screenshots ──
+    defineField({
+      name: 'insightsHeading',
+      title: 'Insights: Heading',
+      type: 'string',
+      initialValue: 'Performance & Insights',
+    }),
+    defineField({
+      name: 'insightsDescription',
+      title: 'Insights: Description',
+      type: 'text',
+      rows: 3,
+      initialValue:
+        'Optional screenshots of real social media insights so brands can understand reach, views, and performance at a glance.',
+    }),
+    defineField({
+      name: 'insightsGallery',
+      title: 'Insights: Screenshots Gallery',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'platform',
+              title: 'Platform (optional)',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'Instagram', value: 'Instagram' },
+                  { title: 'TikTok', value: 'TikTok' },
+                  { title: 'YouTube', value: 'YouTube' },
+                  { title: 'Facebook', value: 'Facebook' },
+                  { title: 'Other', value: 'Other' },
+                ],
+              },
+            }),
+            defineField({
+              name: 'caption',
+              title: 'Caption (optional)',
+              type: 'string',
+              description: 'Short label like "30 days reach" or "Reel views"',
+            }),
+            defineField({
+              name: 'image',
+              title: 'Screenshot Image',
+              type: 'image',
+              options: { hotspot: true },
+            }),
+          ],
+          preview: {
+            select: { title: 'caption', media: 'image', platform: 'platform' },
+            prepare({ title, media, platform }) {
+              return { title: `${platform ? platform + ': ' : ''}${title || 'Insight screenshot'}`, media }
+            },
+          },
+        },
+      ],
+    }),
+
     // ── Pitch section ──
     defineField({
       name: 'pitchDescription',
-      title: 'Pitch Section — Extra Detail',
+      title: 'Pitch Section: Extra Detail',
       type: 'text',
       rows: 4,
       description: 'Additional paragraph in the "Let\'s Create Something" section',
@@ -64,7 +124,7 @@ export default defineType({
     }),
     defineField({
       name: 'pitchBullets',
-      title: 'Pitch Section — Bullet Points',
+      title: 'Pitch Section: Bullet Points',
       type: 'array',
       of: [{ type: 'string' }],
       description: 'Bullet points shown in the pitch/media kit section',
@@ -86,7 +146,7 @@ export default defineType({
           preview: {
             select: { author: 'author', brand: 'brand' },
             prepare({ author, brand }) {
-              return { title: `${author} — ${brand}` }
+              return { title: `${author} - ${brand}` }
             },
           },
         },

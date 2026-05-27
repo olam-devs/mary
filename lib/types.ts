@@ -149,6 +149,13 @@ export interface PortfolioSettings {
     desc: string
     features: string[]
   }>
+  insightsHeading?: string
+  insightsDescription?: string
+  insightsGallery?: Array<{
+    platform?: string
+    caption?: string
+    image?: SanityImage & { imageUrl?: string }
+  }>
   pitchDescription?: string
   pitchBullets?: string[]
   testimonials?: Array<{ quote: string; author: string; brand: string }>

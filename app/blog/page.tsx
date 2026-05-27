@@ -12,9 +12,9 @@ import { getAllBlogPosts, getBlogPageContent } from '@/lib/queries'
 import type { BlogCategory } from '@/lib/types'
 
 export const metadata: Metadata = {
-  title: 'Travel Blog — Hidden Tanzania & East Africa Stories',
+  title: 'Travel Blog: Hidden Tanzania & East Africa Stories',
   description:
-    'Detailed travel guides, budget itineraries, and authentic stories from Tanzania. Solo travel, group adventures, boutique hotels, and local restaurants — all covered by Mary Minza Lucas.',
+    'Detailed travel guides, budget itineraries, and authentic stories from Tanzania. Solo travel, group adventures, boutique hotels, and local restaurants, all covered by Mary Minza Lucas.',
 }
 
 const DEFAULT_HERO_BG = 'https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=1920&q=75'
@@ -65,7 +65,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
         </div>
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
           <AnimatedSection>
-            <p className="label-gold mb-4">Mary Minza Lucas</p>
+            <p className="label-gold mb-4">Stories From The Field</p>
             <h1 className="font-serif text-6xl sm:text-7xl font-bold text-cream-100 mb-4">
               {blogPage.heroTitle || 'The Blog'}
             </h1>

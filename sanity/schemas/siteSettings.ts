@@ -53,7 +53,7 @@ export default defineType({
       title: 'Media Kit (PDF)',
       type: 'file',
       options: { accept: '.pdf' },
-      description: 'Upload your media kit PDF — will be available as a download button',
+      description: 'Upload your media kit PDF. It will be available as a download button.',
     }),
     defineField({
       name: 'seo',

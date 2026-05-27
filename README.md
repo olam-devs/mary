@@ -1,8 +1,8 @@
-# Mary Minza Lucas — Official Website
+# Mary Minza Lucas: Official Website
 
 > **Affordable Adventures. Authentic Stories. Hidden Tanzania Revealed.**
 
-A production-ready Next.js website for **Mary Minza Lucas** — travel content creator and digital marketing strategist based in Dar es Salaam, Tanzania.
+A production-ready Next.js website for **Mary Minza Lucas**, travel content creator and digital marketing strategist based in Dar es Salaam, Tanzania.
 
 ---
 
@@ -85,9 +85,9 @@ http://localhost:3000/studio
 
 | Route | Page |
 |-------|------|
-| `/` | Home — Hero, featured posts & packages |
-| `/about` | About Mary — story, beliefs, timeline |
-| `/blog` | Blog — filterable by category, searchable |
+| `/` | Home: hero, featured posts & packages |
+| `/about` | About Mary: story, beliefs, timeline |
+| `/blog` | Blog: filterable by category, searchable |
 | `/blog/[slug]` | Individual blog post |
 | `/packages` | All travel packages |
 | `/packages/[slug]` | Package detail with price calculator |
@@ -150,4 +150,4 @@ All content is driven by Sanity CMS. To customize:
 
 ## License
 
-Private — Mary Minza Lucas. All rights reserved.
+Private. Mary Minza Lucas. All rights reserved.

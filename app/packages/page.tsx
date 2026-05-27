@@ -9,9 +9,9 @@ import AnimatedSection, { StaggerContainer, StaggerItem } from '@/components/Ani
 import { getAllPackages, getPackagesPageContent } from '@/lib/queries'
 
 export const metadata: Metadata = {
-  title: 'Travel Packages — Curated Tanzania Experiences',
+  title: 'Travel Packages: Curated Tanzania Experiences',
   description:
-    'Curated travel packages designed by Mary Minza Lucas — Serengeti safari, Zanzibar getaways, Dar es Salaam city tours, and more. Transparent pricing for every group size.',
+    'Curated travel packages designed by Mary Minza Lucas. Serengeti safari, Zanzibar getaways, Dar es Salaam city tours, and more. Transparent pricing for every group size.',
 }
 
 const DEFAULT_HERO_BG = 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1920&q=80'
@@ -47,7 +47,7 @@ export default async function PackagesPage() {
         </div>
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
           <AnimatedSection>
-            <p className="label-gold mb-4">Mary's Curated Experiences</p>
+            <p className="label-gold mb-4">Personally Tested · Crafted With Care</p>
             <h1 className="font-serif text-6xl sm:text-7xl font-bold text-cream-100 leading-none mb-4">
               {pkgPage.heroTitle || 'Travel'}
             </h1>
@@ -56,7 +56,7 @@ export default async function PackagesPage() {
             </h1>
             <p className="text-cream-100/75 text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-10">
               {pkgPage.heroDescription ||
-                'Every package is personally designed and tested by Mary. No filler days, no generic itineraries — just handpicked experiences with transparent pricing for every group size.'}
+                'Every package is personally designed and tested by Mary. No filler days, no generic itineraries. Just handpicked experiences with transparent pricing for every group size.'}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a href="#packages" className="btn-primary">
@@ -153,14 +153,14 @@ export default async function PackagesPage() {
                 instantly see the exact price for your group.
               </p>
               <p className="text-earth-400 text-sm leading-relaxed">
-                All prices are in USD. Payment plans available — ask Mary directly.
+                All prices are in USD. Payment plans are available. Ask Mary directly.
               </p>
             </div>
             <div className="space-y-4">
               {[
                 { icon: '🧭', title: 'Solo Travelers', desc: 'Private packages designed for independent explorers.' },
                 { icon: '👫', title: 'Couples & Small Groups', desc: 'Intimate experiences for 2–4 travelers.' },
-                { icon: '👥', title: 'Large Groups', desc: 'Best value per person — perfect for friends & families.' },
+                { icon: '👥', title: 'Large Groups', desc: 'Best value per person. Perfect for friends and families.' },
               ].map((item) => (
                 <div key={item.title} className="flex items-start gap-4 bg-earth-800 px-5 py-4">
                   <span className="text-2xl">{item.icon}</span>
@@ -186,14 +186,14 @@ export default async function PackagesPage() {
             </h2>
             <p className="text-earth-900/70 text-base mb-10">
               Every itinerary I create is fully customizable. Tell me your dates, budget, and
-              interests — I'll design something just for you.
+              interests. I’ll design something just for you.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/contact" className="btn-secondary">
                 Request a Custom Trip
               </Link>
               <a
-                href="https://wa.me/255712345678"
+                href="https://wa.me/255793356660"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 border-2 border-earth-900 text-earth-900 hover:bg-earth-900 hover:text-cream-100 font-semibold text-xs uppercase tracking-widest px-8 py-4 transition-all duration-300"

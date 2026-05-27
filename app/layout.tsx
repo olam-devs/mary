@@ -3,6 +3,7 @@ import { Playfair_Display, Inter } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import { BRAND } from '@/lib/brand'
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -22,11 +23,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://maryminzalucas.com'),
   title: {
-    default: 'Mary Minza Lucas | Travel Creator & Digital Marketing Strategist',
-    template: '%s · Mary Minza Lucas',
+    default: `${BRAND.name} | Tanzania Safari & Travel`,
+    template: `%s · ${BRAND.name}`,
   },
   description:
-    'Affordable Adventures. Authentic Stories. Hidden Tanzania Revealed. Mary Minza Lucas is a travel content creator and digital marketing strategist based in Dar es Salaam.',
+    `${BRAND.motto} Hidden Tanzania Revealed. Safari packages, travel guides, and brand partnerships by ${BRAND.legalName}.`,
   keywords: [
     'Tanzania travel',
     'Dar es Salaam',
@@ -43,8 +44,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    siteName: 'Mary Minza Lucas',
-    title: 'Mary Minza Lucas | Travel Creator & Digital Marketing Strategist',
+    siteName: BRAND.name,
+    title: `${BRAND.name} | Tanzania Safari & Travel`,
     description:
       'Affordable Adventures. Authentic Stories. Hidden Tanzania Revealed.',
     images: [
@@ -52,13 +53,13 @@ export const metadata: Metadata = {
         url: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=1200&q=80',
         width: 1200,
         height: 630,
-        alt: 'Mary Minza Lucas — Tanzania Travel',
+        alt: 'Mary Minza Lucas: Tanzania Travel',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mary Minza Lucas | Tanzania Travel Creator',
+    title: `${BRAND.name} | Tanzania Safaris`,
     description: 'Affordable Adventures. Authentic Stories. Hidden Tanzania Revealed.',
     creator: '@maryminzalucas',
   },
