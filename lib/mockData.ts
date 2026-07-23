@@ -1,11 +1,11 @@
-import type { BlogPost, TravelPackage, PortfolioItem, AboutContent, SiteSettings, HomepageContent, ContactPageContent, PortfolioSettings } from './types'
+import type { BlogPost, TravelPackage, PortfolioItem, AboutContent, SiteSettings, HomepageContent, ContactPageContent, PortfolioSettings, ConservationPageContent } from './types'
 
 // Curated Unsplash images. Tanzania / Africa travel aesthetic.
 const IMAGES = {
   hero: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=1920&q=85',
   safari1: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1200&q=80',
   safari2: 'https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?w=1200&q=80',
-  zanzibar1: 'https://images.unsplash.com/photo-1586861203927-800a5acdce4d?w=1200&q=80',
+  zanzibar1: 'https://images.unsplash.com/photo-1590523278191-995cbcda646b?w=1200&q=80',
   zanzibar2: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1200&q=80',
   kilimanjaro: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=1200&q=80',
   dares: 'https://images.unsplash.com/photo-1604999333679-a86c04a2d8ef?w=1200&q=80',
@@ -113,6 +113,29 @@ export const mockPackages: TravelPackage[] = [
     location: 'Serengeti National Park, Tanzania',
     duration: '3 Days / 2 Nights',
     availabilityMonths: ['January', 'February', 'June', 'July', 'August', 'September', 'October'],
+    itinerary: [
+      {
+        dayLabel: 'Day 1',
+        title: 'Arrival & Sunset Game Drive',
+        description: 'Arrive via road transfer from Arusha and check into your tented camp. Evening game drive to watch predators wake for the night hunt.',
+        meals: 'Lunch & Dinner',
+        stay: 'Serengeti Tented Camp',
+      },
+      {
+        dayLabel: 'Day 2',
+        title: 'Full-Day Migration Tracking',
+        description: "Full-day game drives following the great herds across the central Serengeti, with a picnic lunch out on the plains.",
+        meals: 'All Meals',
+        stay: 'Serengeti Tented Camp',
+      },
+      {
+        dayLabel: 'Day 3',
+        title: 'Morning Drive & Departure',
+        description: 'Early sunrise drive through Seronera Valley for big-cat sightings, then breakfast and transfer back to Arusha.',
+        meals: 'Breakfast',
+        stay: '—',
+      },
+    ],
     pricingTiers: [
       { minPeople: 1, maxPeople: 2, totalPrice: 1200 },
       { minPeople: 3, maxPeople: 4, totalPrice: 1600 },
@@ -323,7 +346,20 @@ export const mockPortfolioItems: PortfolioItem[] = [
 
 export const mockAboutContent: AboutContent = {
   _id: 'aboutContent',
-  profileImage: { asset: { url: IMAGES.blogger }, alt: 'Mary Minza Lucas', imageUrl: IMAGES.blogger } as any,
+  heroEyebrow: 'Our Legacy',
+  heroHeadline: 'A Pioneering Collective',
+  heroSubtext:
+    'Defining the intersection of untamed Tanzanian wilderness and uncompromising, story-driven safari travel.',
+  storyLabel: 'Our Story',
+  missionHeading: 'Built On the Ground, Not From a Brochure',
+  missionBody1:
+    'Minzah Safaris began the way the best local knowledge always does: on foot, in the field, one honest recommendation at a time. Every itinerary we sell today started as a route someone on our team actually walked, priced, and vetted before it ever reached a traveler.',
+  missionBody2:
+    "That same on-the-ground approach carries into how we work with hospitality brands: cinematic documentation paired with digital marketing strategy, so hotels, restaurants, and destinations get real stories instead of stock photography. It's the same standard, whether you're booking a safari or partnering with us.",
+  missionImage: { asset: { url: '/home1.jpeg' }, imageUrl: '/home1.jpeg' } as any,
+  manifestoLabel: 'Our Manifesto',
+  manifestoQuote: 'Adventure is a right, not a luxury, and the wild deserves to be protected, not just photographed.',
+  profileImage: { asset: { url: '/mary-about1.jpeg' }, alt: 'Mary Minza Lucas', imageUrl: '/mary-about1.jpeg' } as any,
   quote: 'Adventure is a right, not a luxury.',
   bioText: [
     "I'm Mary Minza Lucas, a content creator and social media strategist based in Dar es Salaam, Tanzania. I believe deeply that extraordinary travel experiences shouldn't be reserved only for those with extraordinary budgets.",
@@ -353,16 +389,6 @@ export const mockAboutContent: AboutContent = {
       icon: '🏨',
     },
   ],
-  forExplorer: {
-    heading: 'For the Explorer',
-    body: "If you're planning a trip to Tanzania and don't know where to start, I'm your guide. I create detailed, honest, budget-aware content that helps real travelers make real decisions, not just dream from their couch. From solo itineraries to group adventures, every post is rooted in personal experience.",
-    image: { asset: { url: IMAGES.travel1 }, alt: 'Tanzania explorer', imageUrl: IMAGES.travel1 } as any,
-  },
-  forBrand: {
-    heading: 'For the Brand',
-    body: 'I bridge the gap between businesses that need visibility and travelers who need guidance. Through cinematic content creation, strategic social media management, and authentic storytelling, I help hotels, restaurants, and destinations connect with modern, discerning travelers. If your brand values authenticity over polish, let\'s talk.',
-    image: { asset: { url: IMAGES.hotel1 }, alt: 'Brand partnership', imageUrl: IMAGES.hotel1 } as any,
-  },
   timeline: [
     {
       year: '2019',
@@ -408,23 +434,81 @@ export const mockAboutContent: AboutContent = {
 // ============================================================
 
 export const mockHomepageContent: HomepageContent = {
-  heroEyebrow: 'Dar es Salaam, Tanzania',
-  heroTagline1: 'Affordable Adventures. Authentic Stories.',
-  heroTagline2: 'Revealed.',
+  heroBadge: 'The Ultimate Wilderness Experience',
+  heroHeadline: 'Experience the Untamed Wild in Absolute Luxury',
+  heroTagline1: 'Bespoke safari adventures across Tanzania led by world-class guides and conservationists.',
+  heroWidget: {
+    destinationLabel: 'Destination',
+    destinationValue: 'Serengeti, Tanzania',
+    datesLabel: 'Travel Dates',
+    datesValue: 'Flexible · Year-round',
+    guestsLabel: 'Guests',
+    guestsValue: '2 Adults, 1 Suite',
+    ctaLabel: 'Explore Packages',
+    ctaHref: '/packages',
+  },
   stats: [
     { display: 50, suffix: 'K+', label: 'Followers' },
     { display: 120, suffix: '+', label: 'Destinations' },
     { display: 30, suffix: '+', label: 'Brand Partners' },
   ],
-  aboutHeading: 'The Explorer Behind The Stories',
-  aboutQuote: 'Adventure is a right, not a luxury.',
-  aboutBody1:
-    'Mary Minza Lucas is a content creator and digital marketing strategist based in Dar es Salaam, Tanzania. She believes extraordinary experiences belong to everyone, not just those with luxury budgets.',
-  aboutBody2:
-    'From hidden restaurants in Kariakoo to safari drives in the Serengeti, Mary bridges the gap between travelers who need guidance and brands that need visibility, through authentic storytelling and strategic digital marketing.',
-  destinations: [
-    'Dar es Salaam', 'Zanzibar', 'Serengeti', 'Moshi', 'Arusha',
-    'Kilimanjaro', 'Stone Town', 'Ngorongoro', 'Pemba Island', 'Mikumi',
+  regionsHeading: 'Our Iconic Destinations',
+  regionsBody:
+    'We operate in the most breathtaking regions of Tanzania, promising exclusive, private, wild trekking, unrivalled style & comfort, and a range of activities for full immersion in nature and local culture.',
+  regions: [
+    {
+      name: 'Serengeti',
+      description: 'Home to the Great Migration and Tanzania’s most iconic wildlife spectacle across endless golden plains.',
+      image: { asset: { url: IMAGES.safari1 }, imageUrl: IMAGES.safari1 } as any,
+      href: '/packages/serengeti-wildlife-safari',
+    },
+    {
+      name: 'Zanzibar',
+      description: 'Turquoise waters, Stone Town heritage, and sunset dhow cruises along the Spice Island coastline.',
+      image: { asset: { url: IMAGES.zanzibar1 }, imageUrl: IMAGES.zanzibar1 } as any,
+      href: '/packages/zanzibar-island-escape',
+    },
+    {
+      name: 'Ngorongoro',
+      description: 'Descend into the world’s largest intact caldera for unmatched density of big cats and grazing herds.',
+      image: { asset: { url: IMAGES.cultural }, imageUrl: IMAGES.cultural } as any,
+      href: '/packages',
+    },
+    {
+      name: 'Kilimanjaro',
+      description: 'Chagga villages, hidden waterfalls, and coffee farm trails in the foothills of Africa’s highest peak.',
+      image: { asset: { url: IMAGES.kilimanjaro }, imageUrl: IMAGES.kilimanjaro } as any,
+      href: '/packages/kilimanjaro-foothills-waterfalls',
+    },
+  ],
+  whyChooseLabel: 'Unmatched Excellence',
+  whyChooseHeading: 'Why Choose Minzah Safaris',
+  whyChooseBody:
+    'We provide unparalleled access to Tanzania’s most pristine wildlife habitats with a profound focus on conservation and uncompromising quality. Your journey is more than a trip; it’s a story worth telling.',
+  whyChooseImage: { asset: { url: IMAGES.safari2 }, imageUrl: IMAGES.safari2 } as any,
+  whyChooseBadgeNumber: '15+',
+  whyChooseBadgeLabel: 'Years of Experience',
+  whyChooseFeatures: [
+    {
+      icon: 'guides',
+      title: 'Expert Local Guides',
+      description: 'Seasoned guides with decades of combined experience reading wildlife behavior and terrain.',
+    },
+    {
+      icon: 'lodging',
+      title: 'Curated Lodging',
+      description: 'Hand-selected boutique lodges and tented camps that blend comfort with authentic character.',
+    },
+    {
+      icon: 'conservation',
+      title: 'Conservation First',
+      description: 'Every booking contributes directly to community-led wildlife and habitat conservation efforts.',
+    },
+    {
+      icon: 'concierge',
+      title: 'Full Concierge',
+      description: '24/7 personalized support from planning to return, so every detail is handled with care.',
+    },
   ],
   partnershipHeading: "Let's Build Something Worth Sharing",
   partnershipBody:
@@ -460,7 +544,7 @@ export const mockPortfolioSettings: PortfolioSettings = {
   services: [
     {
       icon: '🎥',
-      title: 'User Generated Content (UGC)',
+      title: 'Content Creation',
       desc: 'Cinematic photos and reels that feel authentic, because they are. Created during real visits, not staged shoots. Perfect for hotels, restaurants, and tourism brands.',
       features: ['Reels & short-form video', 'Photography packages', 'Story content', 'Product in context'],
     },
@@ -472,8 +556,8 @@ export const mockPortfolioSettings: PortfolioSettings = {
     },
     {
       icon: '📈',
-      title: 'Social Media Management',
-      desc: "Full-service social media strategy and execution, from content creation to community management. Transform your brand's online presence in 90 days.",
+      title: 'Social Media Growth',
+      desc: "Full-service growth strategy and execution, from content creation to community management. I grew one flagship partner to 10K+ TikTok followers in 90 days.",
       features: ['Monthly content calendars', 'Photography & videography', 'Caption writing', 'Analytics reporting'],
     },
     {
@@ -507,6 +591,61 @@ export const mockPortfolioSettings: PortfolioSettings = {
       brand: 'Dar es Salaam Hotel',
     },
   ],
+}
+
+// ============================================================
+// MOCK CONSERVATION PAGE CONTENT
+// ============================================================
+
+export const mockConservationPageContent: ConservationPageContent = {
+  heroLabel: 'Our Commitment',
+  heroHeading: 'Our Journey & Commitment to the Wild',
+  heroSubtext:
+    'Preserving Tanzania’s wild places while sharing the stories that make them worth protecting.',
+  heroBgImage: { asset: { url: '/started.jpeg' }, imageUrl: '/started.jpeg' } as any,
+  historyLabel: 'Where It Started',
+  historyHeading: 'From Storyteller to Steward',
+  historyBody1:
+    "It started with a camera and a question: why does the world only see Tanzania's postcard version? Years of documenting hidden restaurants, boutique hotels, and community stories built a habit of looking closer, at the people and places behind the destination.",
+  historyBody2:
+    'That habit became a purpose when National Geographic selected Mary for a storytelling externship. Field research and community engagement across East Africa reframed every future itinerary: travel should leave a place better than it found it, not just document it.',
+  historyImage: { asset: { url: '/mary-about1.jpeg' }, imageUrl: '/mary-about1.jpeg' } as any,
+  historyStats: [
+    { value: 'NatGeo', label: 'Storytelling Externship' },
+    { value: '120+', label: 'Destinations Documented' },
+  ],
+  natGeoLabel: 'National Geographic Externship',
+  natGeoHeading: 'The Blue Gold Initiative',
+  natGeoBody:
+    "During the National Geographic externship, field research uncovered a quiet crisis: fish waste and pollution threatening local water systems. Using tools like StoryMaps to turn that environmental challenge into a story that drives action became the foundation of the Blue Gold Initiative, and the reason this website exists: a professional space where travel, conservation, and community impact meet.",
+  natGeoImage: { asset: { url: '/home1.jpeg' }, imageUrl: '/home1.jpeg' } as any,
+  pillarsHeading: 'Conservation & Community',
+  pillarsBody:
+    'Every itinerary is designed to fund the work below, so exploring Tanzania directly supports the people and ecosystems that make it worth visiting.',
+  pillars: [
+    {
+      icon: '🐘',
+      title: 'Wildlife & Habitat Protection',
+      body: 'A share of every booking is directed toward habitat protection and anti-poaching partners working across the parks and reserves featured in our packages.',
+      image: { asset: { url: IMAGES.safari1 }, imageUrl: IMAGES.safari1 } as any,
+    },
+    {
+      icon: '💧',
+      title: 'Blue Gold Initiative',
+      body: 'Born from National Geographic field research on fish waste and water pollution, this initiative supports cleaner water systems for the communities we visit.',
+      image: { asset: { url: IMAGES.waterfall }, imageUrl: IMAGES.waterfall } as any,
+    },
+    {
+      icon: '📖',
+      title: 'Storytelling for Impact',
+      body: 'Using StoryMaps and honest, first-person content, environmental and community challenges are turned into stories that drive real, measurable action.',
+      image: { asset: { url: '/mission.jpeg' }, imageUrl: '/mission.jpeg' } as any,
+    },
+  ],
+  ctaHeading: 'Travel That Gives Back',
+  ctaBody:
+    'Every Minzah Safaris itinerary is designed to protect the wild places it explores. Plan a trip that means something.',
+  ctaBgImage: { asset: { url: IMAGES.safari2 }, imageUrl: IMAGES.safari2 } as any,
 }
 
 // ============================================================

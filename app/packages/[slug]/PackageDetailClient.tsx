@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import {
   FiMapPin,
   FiClock,
@@ -12,6 +12,8 @@ import {
   FiCalendar,
   FiArrowLeft,
   FiMessageCircle,
+  FiGrid,
+  FiUsers,
 } from 'react-icons/fi'
 import PriceCalculator from '@/components/PriceCalculator'
 import AnimatedSection from '@/components/AnimatedSection'
@@ -24,136 +26,160 @@ const MONTHS_FULL = [
 ]
 
 export default function PackageDetailClient({ pkg }: { pkg: TravelPackage }) {
-  const [activeImage, setActiveImage] = useState(0)
-
+  const [galleryOpen, setGalleryOpen] = useState(false)
   const images = pkg.images || []
-  const mainImgSrc = images[activeImage]?.imageUrl || images[activeImage]?.asset?.url || ''
+  const extraCount = Math.max(0, images.length - 5)
 
   return (
     <>
       {/* ============================
-          HERO / GALLERY
+          BREADCRUMB + TITLE
       ============================ */}
-      <section className="pt-20 bg-earth-900">
-        <div className="max-w-screen-2xl mx-auto">
-          {/* Main image */}
-          <div className="relative aspect-video lg:aspect-[21/8] overflow-hidden">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeImage}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-                className="absolute inset-0"
-              >
-                {mainImgSrc && (
-                  <Image
-                    src={mainImgSrc}
-                    alt={images[activeImage]?.alt || pkg.title}
-                    fill
-                    priority
-                    className="object-cover"
-                    sizes="100vw"
-                  />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-earth-900/80 via-transparent to-transparent" />
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Location badge */}
-            <div className="absolute top-6 left-6 bg-earth-900/80 backdrop-blur-sm text-cream-100 px-4 py-2 flex items-center gap-2 text-sm">
-              <FiMapPin size={13} className="text-gold-400" />
-              {pkg.location}
-            </div>
-
-            {/* Category */}
-            {pkg.category && (
-              <div className="absolute top-6 right-6 bg-gold-400 text-earth-900 px-4 py-2 text-[10px] font-bold uppercase tracking-widest">
-                {pkg.category}
-              </div>
-            )}
-
-            {/* Bottom text overlay */}
-            <div className="absolute bottom-8 left-8">
-              <Link
-                href="/packages"
-                className="inline-flex items-center gap-2 text-cream-100/60 hover:text-gold-400 text-xs uppercase tracking-widest mb-3 transition-colors"
-              >
-                <FiArrowLeft size={13} /> All Packages
-              </Link>
-              <h1 className="font-serif text-cream-100 text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+      <section className="bg-cream-100 pt-28 pb-8">
+        <div className="max-w-screen-2xl mx-auto px-6 lg:px-10">
+          <Link
+            href="/packages"
+            className="inline-flex items-center gap-2 text-earth-400 hover:text-gold-500 text-xs uppercase tracking-widest mb-6 transition-colors"
+          >
+            <FiArrowLeft size={13} /> All Packages
+          </Link>
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <div>
+              {pkg.category && (
+                <span className="label-gold mb-3 block">{pkg.category}</span>
+              )}
+              <h1 className="font-serif text-4xl sm:text-5xl font-bold text-earth-900 leading-tight">
                 {pkg.title}
               </h1>
+              <div className="flex flex-wrap items-center gap-6 mt-4 text-earth-500 text-sm">
+                <span className="flex items-center gap-1.5">
+                  <FiClock size={14} className="text-gold-500" /> {pkg.duration}
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <FiMapPin size={14} className="text-gold-500" /> {pkg.location}
+                </span>
+                {pkg.pricingTiers?.length > 0 && (
+                  <span className="flex items-center gap-1.5">
+                    <FiUsers size={14} className="text-gold-500" /> Max{' '}
+                    {Math.max(...pkg.pricingTiers.map((t) => t.maxPeople))} guests
+                  </span>
+                )}
+              </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Thumbnail strip */}
-          {images.length > 1 && (
-            <div className="flex gap-2 p-4 bg-earth-800 overflow-x-auto">
-              {images.map((img, i) => {
-                const thumbSrc = img.imageUrl || img.asset?.url || ''
+      {/* ============================
+          BENTO GALLERY
+      ============================ */}
+      {images.length > 0 && (
+        <section className="bg-cream-100 pb-16">
+          <div className="max-w-screen-2xl mx-auto px-6 lg:px-10">
+            <div className="grid h-[320px] grid-cols-2 gap-3 sm:h-[420px] md:h-[500px] md:grid-cols-4 md:grid-rows-2">
+              {images.slice(0, 5).map((img, i) => {
+                const src = img.imageUrl || img.asset?.url || ''
+                const isLast = i === 4 && extraCount > 0
                 return (
                   <button
                     key={i}
-                    onClick={() => setActiveImage(i)}
-                    className={`relative flex-shrink-0 w-24 h-16 overflow-hidden transition-all duration-300 ${
-                      activeImage === i ? 'ring-2 ring-gold-400 opacity-100' : 'opacity-50 hover:opacity-80'
+                    onClick={() => setGalleryOpen(true)}
+                    className={`group relative overflow-hidden rounded-xl ${
+                      i === 0 ? 'col-span-2 row-span-2 md:col-span-2 md:row-span-2' : ''
                     }`}
                   >
-                    {thumbSrc && (
+                    {src && (
                       <Image
-                        src={thumbSrc}
-                        alt={img.alt || `Photo ${i + 1}`}
+                        src={src}
+                        alt={img.alt || `${pkg.title} photo ${i + 1}`}
                         fill
-                        className="object-cover"
-                        sizes="96px"
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        sizes="(max-width: 768px) 50vw, 25vw"
                       />
+                    )}
+                    {isLast && (
+                      <div className="absolute inset-0 flex flex-col items-center justify-center gap-1 bg-earth-900/60 font-bold text-cream-100 backdrop-blur-sm">
+                        <FiGrid size={22} />
+                        <span>+{extraCount} Photos</span>
+                      </div>
                     )}
                   </button>
                 )
               })}
             </div>
-          )}
+          </div>
+        </section>
+      )}
+
+      {/* Simple lightbox */}
+      {galleryOpen && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-earth-900/95 p-6"
+          onClick={() => setGalleryOpen(false)}
+        >
+          <button
+            onClick={() => setGalleryOpen(false)}
+            className="absolute right-6 top-6 text-cream-100 hover:text-gold-400"
+            aria-label="Close gallery"
+          >
+            <FiX size={28} />
+          </button>
+          <div className="flex max-w-5xl flex-wrap justify-center gap-3 overflow-y-auto">
+            {images.map((img, i) => {
+              const src = img.imageUrl || img.asset?.url || ''
+              return src ? (
+                <div key={i} className="relative h-56 w-80 overflow-hidden rounded-lg">
+                  <Image src={src} alt={img.alt || `Photo ${i + 1}`} fill className="object-cover" sizes="320px" />
+                </div>
+              ) : null
+            })}
+          </div>
         </div>
-      </section>
+      )}
 
       {/* ============================
           MAIN CONTENT
       ============================ */}
-      <section className="py-20 bg-cream-100">
+      <section className="py-8 bg-cream-100">
         <div className="max-w-screen-2xl mx-auto px-6 lg:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
 
             {/* LEFT: Details */}
             <div className="lg:col-span-2 space-y-12">
-              {/* Meta bar */}
-              <div className="flex flex-wrap gap-6 pb-8 border-b border-cream-200">
-                {pkg.duration && (
-                  <div className="flex items-center gap-2 text-earth-600 text-sm">
-                    <FiClock size={14} className="text-gold-400" />
-                    {pkg.duration}
-                  </div>
-                )}
-                {pkg.pricingTiers && (
-                  <div className="flex items-center gap-2 text-earth-600 text-sm">
-                    <span className="text-gold-400">👥</span>
-                    Up to {Math.max(...pkg.pricingTiers.map((t) => t.maxPeople))} people
-                  </div>
-                )}
-                {pkg.availabilityMonths && (
-                  <div className="flex items-center gap-2 text-earth-600 text-sm">
-                    <FiCalendar size={14} className="text-gold-400" />
-                    {pkg.availabilityMonths.length} months available
-                  </div>
-                )}
-              </div>
-
               {/* Description */}
               <AnimatedSection>
                 <h2 className="font-serif text-earth-900 text-2xl font-bold mb-4">Overview</h2>
                 <p className="text-earth-600 leading-8 text-base">{pkg.description}</p>
               </AnimatedSection>
+
+              {/* Day-by-day itinerary */}
+              {pkg.itinerary && pkg.itinerary.length > 0 && (
+                <AnimatedSection delay={0.05}>
+                  <h2 className="font-serif text-earth-900 text-2xl font-bold mb-8">Day-by-Day Journey</h2>
+                  <div className="relative space-y-8 border-l-2 border-gold-400/25 pl-8">
+                    {pkg.itinerary.map((day, i) => (
+                      <div key={i} className="relative">
+                        <div className="absolute -left-[35px] top-1 h-3.5 w-3.5 rounded-full border-4 border-cream-100 bg-gold-400" />
+                        <span className="mb-1 block text-xs font-bold uppercase tracking-widest text-gold-500">
+                          {day.dayLabel}
+                        </span>
+                        <h4 className="mb-2 font-serif text-xl font-bold text-earth-900">{day.title}</h4>
+                        {day.description && (
+                          <p className="mb-3 text-earth-600 text-sm leading-relaxed">{day.description}</p>
+                        )}
+                        <div className="flex flex-wrap gap-4">
+                          {day.meals && (
+                            <span className="text-xs font-semibold text-earth-500">🍽️ {day.meals}</span>
+                          )}
+                          {day.stay && day.stay !== '—' && (
+                            <span className="text-xs font-semibold text-earth-500">🏕️ {day.stay}</span>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </AnimatedSection>
+              )}
 
               {/* Highlights */}
               {pkg.highlights && pkg.highlights.length > 0 && (
@@ -246,7 +272,7 @@ export default function PackageDetailClient({ pkg }: { pkg: TravelPackage }) {
             <div className="space-y-6">
               <div className="lg:sticky lg:top-28 space-y-6">
                 <AnimatedSection direction="right">
-                  <PriceCalculator tiers={pkg.pricingTiers} currency={pkg.currency ?? 'USD'} title="Price Calculator" />
+                  <PriceCalculator tiers={pkg.pricingTiers} currency={pkg.currency ?? 'USD'} title="Group Expedition Planner" />
                 </AnimatedSection>
 
                 <AnimatedSection direction="right" delay={0.1}>

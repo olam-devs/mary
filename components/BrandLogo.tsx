@@ -24,12 +24,12 @@ export default function BrandLogo({
       aria-hidden
       className="flex-shrink-0"
     >
-      <rect width="48" height="48" fill="#FF5722" />
+      <rect width="48" height="48" fill="#F47B25" />
       <path
         d="M11 33V15h4.2l6.3 10.2L27.8 15H32v18h-3.8V22.4L21.2 33h-3.4l-6.8-10.6V33H11z"
-        fill="#1B2A4A"
+        fill="#1B110B"
       />
-      <rect x="11" y="11" width="26" height="1.5" fill="#1B2A4A" fillOpacity="0.2" />
+      <rect x="11" y="11" width="26" height="1.5" fill="#1B110B" fillOpacity="0.2" />
     </svg>
   )
 

@@ -5,9 +5,9 @@ import { getAboutContent } from '@/lib/queries'
 import AboutPageClient from './AboutPageClient'
 
 export const metadata: Metadata = {
-  title: 'About Mary Minza Lucas',
+  title: 'About Minzah Safaris',
   description:
-    'Content creator, digital marketing strategist, and Tanzania explorer. Mary Minza Lucas explores hidden gems in Dar es Salaam, Zanzibar, Serengeti, and beyond, making adventure accessible.',
+    'The story behind Minzah Safaris: on-the-ground Tanzania expertise, an honest travel philosophy, and a journey shaped by conservation and community.',
 }
 
 export default async function AboutPage() {

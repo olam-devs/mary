@@ -13,6 +13,7 @@ const footerLinks = {
     { href: '/blog', label: 'Travel Blog' },
     { href: '/packages', label: 'Travel Packages' },
     { href: '/portfolio', label: 'Portfolio' },
+    { href: '/conservation', label: 'Conservation' },
     { href: '/contact', label: 'Contact' },
   ],
   categories: [

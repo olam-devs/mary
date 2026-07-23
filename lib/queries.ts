@@ -1,6 +1,6 @@
 import { sanityFetch } from './sanity'
-import type { BlogPost, TravelPackage, PortfolioItem, AboutContent, SiteSettings, HomepageContent, ContactPageContent, PortfolioSettings, BlogPageContent, PackagesPageContent } from './types'
-import { mockBlogPosts, mockPackages, mockPortfolioItems, mockAboutContent, mockSiteSettings, mockHomepageContent, mockContactPageContent, mockPortfolioSettings } from './mockData'
+import type { BlogPost, TravelPackage, PortfolioItem, AboutContent, SiteSettings, HomepageContent, ContactPageContent, PortfolioSettings, BlogPageContent, PackagesPageContent, ConservationPageContent } from './types'
+import { mockBlogPosts, mockPackages, mockPortfolioItems, mockAboutContent, mockSiteSettings, mockHomepageContent, mockContactPageContent, mockPortfolioSettings, mockConservationPageContent } from './mockData'
 
 const IMAGE_PROJECTION = `{
   asset->{url, _id},
@@ -87,6 +87,7 @@ const PACKAGE_FIELDS = `
     maxPeople,
     totalPrice
   },
+  itinerary,
   included,
   excluded,
   featured,
@@ -119,10 +120,14 @@ export async function getPackageBySlug(slug: string): Promise<TravelPackage | nu
 }
 
 function normalizePackage(pkg: any): TravelPackage {
+  // "itinerary" was added after some live packages were created — fall back to
+  // the matching mock package's itinerary (if any) so the section isn't just missing.
+  const mockMatch = mockPackages.find((p) => p.slug.current === pkg.slug)
   return {
     ...pkg,
     slug: { current: pkg.slug },
     currency: pkg.currency ?? 'USD',
+    itinerary: pkg.itinerary?.length ? pkg.itinerary : mockMatch?.itinerary,
     images: (pkg.images || []).map((img: any) => ({
       ...img,
       imageUrl: img?.asset?.url,
@@ -175,21 +180,21 @@ export async function getAboutContent(): Promise<AboutContent> {
   const query = `*[_type == "aboutContent"][0] {
     _id,
     heroBgImage ${IMAGE_PROJECTION},
+    heroEyebrow,
+    heroHeadline,
+    heroSubtext,
+    storyLabel,
+    missionHeading,
+    missionBody1,
+    missionBody2,
+    missionImage ${IMAGE_PROJECTION},
     quote,
     profileImage ${IMAGE_PROJECTION},
     bioText,
     highlights,
+    manifestoLabel,
+    manifestoQuote,
     beliefs,
-    forExplorer {
-      heading,
-      body,
-      image ${IMAGE_PROJECTION}
-    },
-    forBrand {
-      heading,
-      body,
-      image ${IMAGE_PROJECTION}
-    },
     timeline,
     stats
   }`
@@ -197,28 +202,20 @@ export async function getAboutContent(): Promise<AboutContent> {
   if (!result) return mockAboutContent
   return {
     ...result,
+    missionHeading: result.missionHeading || mockAboutContent.missionHeading,
+    missionBody1: result.missionBody1 || mockAboutContent.missionBody1,
+    missionBody2: result.missionBody2 || mockAboutContent.missionBody2,
+    manifestoQuote: result.manifestoQuote || mockAboutContent.manifestoQuote,
+    beliefs: result.beliefs?.length ? result.beliefs : mockAboutContent.beliefs,
     heroBgImage: result.heroBgImage
       ? { ...result.heroBgImage, imageUrl: result.heroBgImage?.asset?.url }
       : undefined,
+    missionImage: result.missionImage?.asset?.url
+      ? { ...result.missionImage, imageUrl: result.missionImage.asset.url }
+      : mockAboutContent.missionImage,
     profileImage: result.profileImage
       ? { ...result.profileImage, imageUrl: result.profileImage?.asset?.url }
-      : undefined,
-    forExplorer: result.forExplorer
-      ? {
-          ...result.forExplorer,
-          image: result.forExplorer.image
-            ? { ...result.forExplorer.image, imageUrl: result.forExplorer.image?.asset?.url }
-            : undefined,
-        }
-      : undefined,
-    forBrand: result.forBrand
-      ? {
-          ...result.forBrand,
-          image: result.forBrand.image
-            ? { ...result.forBrand.image, imageUrl: result.forBrand.image?.asset?.url }
-            : undefined,
-        }
-      : undefined,
+      : mockAboutContent.profileImage,
   }
 }
 
@@ -249,25 +246,58 @@ export async function getSiteSettings(): Promise<SiteSettings> {
 
 export async function getHomepageContent(): Promise<HomepageContent> {
   const query = `*[_type == "homepageContent"][0] {
-    heroEyebrow,
+    heroBadge,
+    heroHeadline,
     heroTagline1,
-    heroTagline2,
     heroImage ${IMAGE_PROJECTION},
+    heroWidget,
     stats,
-    aboutHeading,
-    aboutQuote,
-    aboutBody1,
-    aboutBody2,
-    destinations,
+    regionsHeading,
+    regionsBody,
+    regions[] {
+      name,
+      description,
+      href,
+      image ${IMAGE_PROJECTION}
+    },
+    whyChooseLabel,
+    whyChooseHeading,
+    whyChooseBody,
+    whyChooseImage ${IMAGE_PROJECTION},
+    whyChooseBadgeNumber,
+    whyChooseBadgeLabel,
+    whyChooseFeatures,
     partnershipHeading,
     partnershipBody,
     partnershipBgImage ${IMAGE_PROJECTION}
   }`
   const result = await sanityFetch<any>(query)
   if (!result) return mockHomepageContent
+
+  // Fields added after the live Sanity document was first created won't exist
+  // in it yet — fall back to the mock defaults per-field so the page never
+  // looks half-built while the client fills in Studio.
+  const regions = result.regions?.length ? result.regions : mockHomepageContent.regions
+  const whyChooseFeatures = result.whyChooseFeatures?.length
+    ? result.whyChooseFeatures
+    : mockHomepageContent.whyChooseFeatures
+  const whyChooseImage = result.whyChooseImage ?? mockHomepageContent.whyChooseImage
+  const heroWidget = result.heroWidget ?? mockHomepageContent.heroWidget
+
   return {
     ...result,
+    regionsBody: result.regionsBody || mockHomepageContent.regionsBody,
+    whyChooseBody: result.whyChooseBody || mockHomepageContent.whyChooseBody,
+    heroWidget,
     heroImage: result.heroImage ? { ...result.heroImage, imageUrl: result.heroImage?.asset?.url } : undefined,
+    whyChooseImage: whyChooseImage?.asset?.url
+      ? { ...whyChooseImage, imageUrl: whyChooseImage.asset.url }
+      : whyChooseImage,
+    regions: regions.map((r: any) => ({
+      ...r,
+      image: r.image?.asset?.url ? { ...r.image, imageUrl: r.image.asset.url } : r.image,
+    })),
+    whyChooseFeatures,
     partnershipBgImage: result.partnershipBgImage ? { ...result.partnershipBgImage, imageUrl: result.partnershipBgImage?.asset?.url } : undefined,
   }
 }
@@ -322,6 +352,9 @@ export async function getPortfolioSettings(): Promise<PortfolioSettings> {
     heroBgImage: result.heroBgImage
       ? { ...result.heroBgImage, imageUrl: result.heroBgImage?.asset?.url }
       : undefined,
+    services: result.services?.length ? result.services : mockPortfolioSettings.services,
+    pitchBullets: result.pitchBullets?.length ? result.pitchBullets : mockPortfolioSettings.pitchBullets,
+    testimonials: result.testimonials?.length ? result.testimonials : mockPortfolioSettings.testimonials,
     insightsGallery: (result.insightsGallery || []).map((item: any) => ({
       ...item,
       image: item.image ? { ...item.image, imageUrl: item.image?.asset?.url } : undefined,
@@ -367,5 +400,64 @@ export async function getPackagesPageContent(): Promise<PackagesPageContent> {
     heroBgImage: result.heroBgImage
       ? { ...result.heroBgImage, imageUrl: result.heroBgImage?.asset?.url }
       : undefined,
+  }
+}
+
+// ============================================================
+// CONSERVATION PAGE CONTENT
+// ============================================================
+
+export async function getConservationPageContent(): Promise<ConservationPageContent> {
+  const query = `*[_type == "conservationPage"][0] {
+    heroBgImage ${IMAGE_PROJECTION},
+    heroLabel,
+    heroHeading,
+    heroSubtext,
+    historyLabel,
+    historyHeading,
+    historyBody1,
+    historyBody2,
+    historyImage ${IMAGE_PROJECTION},
+    historyStats,
+    natGeoLabel,
+    natGeoHeading,
+    natGeoBody,
+    natGeoImage ${IMAGE_PROJECTION},
+    pillarsHeading,
+    pillarsBody,
+    pillars[] {
+      icon,
+      title,
+      body,
+      image ${IMAGE_PROJECTION}
+    },
+    ctaHeading,
+    ctaBody,
+    ctaBgImage ${IMAGE_PROJECTION}
+  }`
+  const result = await sanityFetch<any>(query)
+  if (!result) return mockConservationPageContent
+  return {
+    ...mockConservationPageContent,
+    ...result,
+    heroBgImage: result.heroBgImage
+      ? { ...result.heroBgImage, imageUrl: result.heroBgImage?.asset?.url }
+      : mockConservationPageContent.heroBgImage,
+    historyImage: result.historyImage
+      ? { ...result.historyImage, imageUrl: result.historyImage?.asset?.url }
+      : mockConservationPageContent.historyImage,
+    natGeoImage: result.natGeoImage
+      ? { ...result.natGeoImage, imageUrl: result.natGeoImage?.asset?.url }
+      : mockConservationPageContent.natGeoImage,
+    ctaBgImage: result.ctaBgImage
+      ? { ...result.ctaBgImage, imageUrl: result.ctaBgImage?.asset?.url }
+      : mockConservationPageContent.ctaBgImage,
+    historyStats: result.historyStats?.length ? result.historyStats : mockConservationPageContent.historyStats,
+    pillars: result.pillars?.length
+      ? result.pillars.map((p: any) => ({
+          ...p,
+          image: p.image?.asset?.url ? { ...p.image, imageUrl: p.image.asset.url } : p.image,
+        }))
+      : mockConservationPageContent.pillars,
   }
 }

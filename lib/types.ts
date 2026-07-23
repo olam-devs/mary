@@ -48,6 +48,13 @@ export interface TravelPackage {
   availabilityMonths?: string[]
   currency?: 'USD' | 'TSh'
   pricingTiers: PricingTier[]
+  itinerary?: Array<{
+    dayLabel?: string
+    title?: string
+    description?: string
+    meals?: string
+    stay?: string
+  }>
   included?: string[]
   excluded?: string[]
   featured?: boolean
@@ -78,13 +85,21 @@ export interface TimelineItem {
 export interface AboutContent {
   _id: string
   heroBgImage?: SanityImage & { imageUrl?: string }
+  heroEyebrow?: string
+  heroHeadline?: string
+  heroSubtext?: string
+  storyLabel?: string
+  missionHeading?: string
+  missionBody1?: string
+  missionBody2?: string
+  missionImage?: SanityImage & { imageUrl?: string }
   quote?: string
   profileImage?: SanityImage & { imageUrl?: string }
   bioText?: string[]
   highlights?: string[]
+  manifestoLabel?: string
+  manifestoQuote?: string
   beliefs?: Array<{ title: string; description?: string; icon?: string }>
-  forExplorer?: { heading?: string; body?: string; image?: SanityImage & { imageUrl?: string } }
-  forBrand?: { heading?: string; body?: string; image?: SanityImage & { imageUrl?: string } }
   timeline?: TimelineItem[]
   stats?: Array<{ value: string; label: string }>
 }
@@ -116,16 +131,40 @@ export interface PackagesPageContent {
 }
 
 export interface HomepageContent {
-  heroEyebrow?: string
+  heroBadge?: string
+  heroHeadline?: string
   heroTagline1?: string
-  heroTagline2?: string
   heroImage?: SanityImage & { imageUrl?: string }
+  heroWidget?: {
+    destinationLabel?: string
+    destinationValue?: string
+    datesLabel?: string
+    datesValue?: string
+    guestsLabel?: string
+    guestsValue?: string
+    ctaLabel?: string
+    ctaHref?: string
+  }
   stats?: Array<{ display: number; suffix: string; label: string }>
-  aboutHeading?: string
-  aboutQuote?: string
-  aboutBody1?: string
-  aboutBody2?: string
-  destinations?: string[]
+  regionsHeading?: string
+  regionsBody?: string
+  regions?: Array<{
+    name: string
+    description?: string
+    image?: SanityImage & { imageUrl?: string }
+    href?: string
+  }>
+  whyChooseLabel?: string
+  whyChooseHeading?: string
+  whyChooseBody?: string
+  whyChooseImage?: SanityImage & { imageUrl?: string }
+  whyChooseBadgeNumber?: string
+  whyChooseBadgeLabel?: string
+  whyChooseFeatures?: Array<{
+    icon?: 'guides' | 'lodging' | 'conservation' | 'concierge'
+    title?: string
+    description?: string
+  }>
   partnershipHeading?: string
   partnershipBody?: string
   partnershipBgImage?: SanityImage & { imageUrl?: string }
@@ -159,6 +198,29 @@ export interface PortfolioSettings {
   pitchDescription?: string
   pitchBullets?: string[]
   testimonials?: Array<{ quote: string; author: string; brand: string }>
+}
+
+export interface ConservationPageContent {
+  heroBgImage?: SanityImage & { imageUrl?: string }
+  heroLabel?: string
+  heroHeading?: string
+  heroSubtext?: string
+  historyLabel?: string
+  historyHeading?: string
+  historyBody1?: string
+  historyBody2?: string
+  historyImage?: SanityImage & { imageUrl?: string }
+  historyStats?: Array<{ value: string; label: string }>
+  natGeoLabel?: string
+  natGeoHeading?: string
+  natGeoBody?: string
+  natGeoImage?: SanityImage & { imageUrl?: string }
+  pillarsHeading?: string
+  pillarsBody?: string
+  pillars?: Array<{ icon?: string; title?: string; body?: string; image?: SanityImage & { imageUrl?: string } }>
+  ctaHeading?: string
+  ctaBody?: string
+  ctaBgImage?: SanityImage & { imageUrl?: string }
 }
 
 export type BlogCategory =

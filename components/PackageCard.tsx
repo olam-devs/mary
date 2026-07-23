@@ -86,7 +86,7 @@ export default function PackageCard({ pkg, index = 0 }: PackageCardProps) {
                   const isAvailable = pkg.availabilityMonths?.includes(months[i])
                   return (
                     <div
-                      key={m}
+                      key={i}
                       className={`w-5 h-5 flex items-center justify-center text-[9px] font-bold ${
                         isAvailable ? 'bg-gold-400 text-earth-900' : 'bg-earth-900/60 text-earth-400'
                       }`}

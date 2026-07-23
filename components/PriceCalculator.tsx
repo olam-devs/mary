@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FiUsers, FiDollarSign, FiCheck } from 'react-icons/fi'
+import { FiUsers, FiMinus, FiPlus, FiArrowRight } from 'react-icons/fi'
 import type { PricingTier } from '@/lib/types'
 
 type Currency = 'USD' | 'TSh'
@@ -14,187 +14,149 @@ interface PriceCalculatorProps {
 }
 
 function fmt(amount: number, currency: Currency): string {
-  if (currency === 'TSh') {
-    return `TSh ${amount.toLocaleString()}`
-  }
+  if (currency === 'TSh') return `TSh ${amount.toLocaleString()}`
   return `$${amount.toLocaleString()}`
 }
 
-interface CalculationResult {
-  tier: PricingTier
-  totalPrice: number
-  pricePerPerson: number
+function tierLabelFor(count: number, sortedTiers: PricingTier[]): string {
+  const index = sortedTiers.findIndex((t) => count >= t.minPeople && count <= t.maxPeople)
+  if (index === -1) return ''
+  if (index === 0) return 'Solo / Small Group Rate'
+  if (index === sortedTiers.length - 1) return 'Maximum Group Discount Applied'
+  return 'Group Savings Unlocked'
 }
 
 export default function PriceCalculator({ tiers, currency = 'USD', title }: PriceCalculatorProps) {
-  const [peopleCount, setPeopleCount] = useState<number | ''>('')
-  const [result, setResult] = useState<CalculationResult | null>(null)
-  const [error, setError] = useState<string | null>(null)
+  const sortedTiers = useMemo(() => [...tiers].sort((a, b) => a.minPeople - b.minPeople), [tiers])
+  const minGroup = Math.min(...tiers.map((t) => t.minPeople))
+  const maxGroup = Math.max(...tiers.map((t) => t.maxPeople))
 
-  function calculatePrice() {
-    const count = Number(peopleCount)
-    if (!count || count < 1) {
-      setError('Please enter a valid number of people (minimum 1).')
-      setResult(null)
-      return
-    }
+  const [count, setCount] = useState(minGroup)
 
-    const matchedTier = tiers.find(
-      (t) => count >= t.minPeople && count <= t.maxPeople
-    )
+  const activeTier = sortedTiers.find((t) => count >= t.minPeople && count <= t.maxPeople)
+  const totalPrice = activeTier?.totalPrice ?? 0
+  const pricePerPerson = activeTier ? Math.ceil(activeTier.totalPrice / count) : 0
+  const tierLabel = tierLabelFor(count, sortedTiers)
 
-    if (!matchedTier) {
-      const maxGroup = Math.max(...tiers.map((t) => t.maxPeople))
-      const minGroup = Math.min(...tiers.map((t) => t.minPeople))
-      if (count > maxGroup) {
-        setError(`Maximum group size is ${maxGroup} people. Contact us for larger groups.`)
-      } else if (count < minGroup) {
-        setError(`Minimum group size is ${minGroup} person.`)
-      } else {
-        setError('No pricing tier available for this group size.')
-      }
-      setResult(null)
-      return
-    }
-
-    setError(null)
-    setResult({
-      tier: matchedTier,
-      totalPrice: matchedTier.totalPrice,
-      pricePerPerson: Math.ceil(matchedTier.totalPrice / count),
-    })
+  function adjust(delta: number) {
+    setCount((c) => Math.min(maxGroup, Math.max(minGroup, c + delta)))
   }
 
-  const sortedTiers = [...tiers].sort((a, b) => a.minPeople - b.minPeople)
-  const maxPeople = Math.max(...tiers.map((t) => t.maxPeople))
-
   return (
-    <div className="bg-cream-100 border border-sand-300 p-8">
+    <div className="relative overflow-hidden bg-earth-900 p-8 shadow-luxury">
       {title && (
-        <h3 className="font-serif text-earth-900 text-2xl font-bold mb-6">{title}</h3>
+        <h3 className="mb-6 font-serif text-2xl font-bold text-cream-100">{title}</h3>
       )}
 
-      {/* Pricing tiers overview */}
-      <div className="mb-8">
-        <p className="label-earth mb-4">Pricing Tiers</p>
-        <div className="space-y-2">
-          {sortedTiers.map((tier, i) => {
-            const perPerson = Math.ceil(tier.totalPrice / tier.maxPeople)
-            return (
-              <div
-                key={i}
-                className="flex items-center justify-between bg-white px-5 py-3 border border-cream-200"
-              >
-                <div className="flex items-center gap-2 text-earth-700 text-sm">
-                  <FiUsers size={14} className="text-gold-400" />
-                  <span>
-                    {tier.minPeople === tier.maxPeople
-                      ? `${tier.minPeople} person`
-                      : `${tier.minPeople}–${tier.maxPeople} people`}
-                  </span>
-                </div>
-                <div className="text-right">
-                  <span className="font-serif text-gold-500 font-bold">{fmt(tier.totalPrice, currency)}</span>
-                  <span className="text-earth-400 text-xs ml-2">(~{fmt(perPerson, currency)}/person)</span>
-                </div>
-              </div>
-            )
-          })}
+      {/* Group size counter */}
+      <div className="mb-6 space-y-3">
+        <label className="block text-center text-xs font-bold uppercase tracking-widest text-earth-300">
+          Number of People
+        </label>
+        <div className="flex items-center justify-between rounded-full border border-earth-700 bg-earth-800 p-2">
+          <button
+            onClick={() => adjust(-1)}
+            disabled={count <= minGroup}
+            aria-label="Decrease group size"
+            className="flex h-11 w-11 items-center justify-center rounded-full bg-earth-700 text-cream-100 transition-all hover:bg-gold-400 hover:text-earth-900 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-earth-700 disabled:hover:text-cream-100"
+          >
+            <FiMinus size={16} />
+          </button>
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={count}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.2 }}
+              className="font-serif text-3xl font-bold text-gold-400"
+            >
+              {count}
+            </motion.span>
+          </AnimatePresence>
+          <button
+            onClick={() => adjust(1)}
+            disabled={count >= maxGroup}
+            aria-label="Increase group size"
+            className="flex h-11 w-11 items-center justify-center rounded-full bg-earth-700 text-cream-100 transition-all hover:bg-gold-400 hover:text-earth-900 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-earth-700 disabled:hover:text-cream-100"
+          >
+            <FiPlus size={16} />
+          </button>
         </div>
       </div>
 
-      {/* Calculator */}
-      <div className="divider-gold mb-8" />
-
-      <p className="label-earth mb-4">Calculate Your Price</p>
-      <div className="flex flex-col sm:flex-row gap-4 mb-6">
-        <div className="flex-1 relative">
-          <FiUsers size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-earth-400" />
-          <input
-            type="number"
-            min={1}
-            max={maxPeople}
-            value={peopleCount}
-            onChange={(e) => {
-              setPeopleCount(e.target.value === '' ? '' : Number(e.target.value))
-              setResult(null)
-              setError(null)
-            }}
-            onKeyDown={(e) => e.key === 'Enter' && calculatePrice()}
-            placeholder={`How many people? (1–${maxPeople})`}
-            className="w-full border border-sand-300 bg-white text-earth-900 pl-11 pr-5 py-4 text-sm placeholder:text-earth-400 focus:outline-none focus:border-gold-400 focus:ring-1 focus:ring-gold-400 transition-colors duration-200"
-          />
-        </div>
-        <button
-          onClick={calculatePrice}
-          className="btn-primary px-8 py-4 flex-shrink-0"
+      {/* Tier badge */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={tierLabel}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="mb-6 rounded-lg border border-earth-700 bg-earth-800/50 px-4 py-3 text-center"
         >
-          Check Price
-        </button>
+          <p className="text-xs font-bold uppercase italic tracking-tight text-gold-400">{tierLabel}</p>
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Live price */}
+      <div className="space-y-3 border-t border-earth-700 pt-6">
+        <div className="flex items-end justify-between">
+          <span className="text-sm text-earth-300">Price Per Person</span>
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={pricePerPerson}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              className="font-serif text-xl font-bold text-cream-100"
+            >
+              {fmt(pricePerPerson, currency)}
+            </motion.span>
+          </AnimatePresence>
+        </div>
+        <div className="flex items-end justify-between rounded-xl bg-gold-400/10 p-5">
+          <span className="font-semibold text-gold-400">Total Estimated Price</span>
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={totalPrice}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              className="font-serif text-2xl font-bold text-gold-400"
+            >
+              {fmt(totalPrice, currency)}
+            </motion.span>
+          </AnimatePresence>
+        </div>
       </div>
 
-      {/* Error */}
-      <AnimatePresence mode="wait">
-        {error && (
-          <motion.div
-            key="error"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="bg-red-50 border border-red-200 text-red-700 px-5 py-3 text-sm mb-4"
+      <a
+        href="https://wa.me/255793356660"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="btn-primary mt-6 flex w-full items-center justify-center gap-2"
+      >
+        Proceed with Group Booking <FiArrowRight size={14} />
+      </a>
+
+      {/* Tier reference table */}
+      <div className="mt-8 space-y-2 border-t border-earth-700 pt-6">
+        <p className="mb-3 text-[10px] font-bold uppercase tracking-widest text-earth-400">All Pricing Tiers</p>
+        {sortedTiers.map((tier, i) => (
+          <div
+            key={i}
+            className={`flex items-center justify-between px-4 py-2.5 text-xs transition-colors ${
+              tier === activeTier ? 'bg-gold-400/15 text-gold-300' : 'text-earth-400'
+            }`}
           >
-            {error}
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Result */}
-      <AnimatePresence mode="wait">
-        {result && (
-          <motion.div
-            key="result"
-            initial={{ opacity: 0, y: 20, scale: 0.97 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ type: 'spring', bounce: 0.3, duration: 0.5 }}
-            className="bg-earth-900 text-cream-100 p-6 mt-2"
-          >
-            <div className="flex items-center gap-2 mb-5">
-              <div className="w-6 h-6 bg-gold-400 rounded-full flex items-center justify-center flex-shrink-0">
-                <FiCheck size={13} className="text-earth-900" />
-              </div>
-              <p className="text-cream-100/80 text-sm">
-                For a group of <strong className="text-cream-100">{peopleCount} people</strong>:
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4 mb-5">
-              <div className="bg-earth-800 p-4 text-center">
-                <FiDollarSign size={18} className="text-gold-400 mx-auto mb-1" />
-                <div className="font-serif text-2xl font-bold text-gold-400">
-                  {fmt(result.pricePerPerson, currency)}
-                </div>
-                <div className="text-earth-400 text-xs uppercase tracking-widest mt-1">Per Person</div>
-              </div>
-              <div className="bg-earth-800 p-4 text-center">
-                <div className="text-earth-400 text-xs uppercase tracking-widest mb-1">Total Package</div>
-                <div className="font-serif text-2xl font-bold text-cream-100">
-                  {fmt(result.totalPrice, currency)}
-                </div>
-                <div className="text-earth-400 text-xs mt-1">{currency}</div>
-              </div>
-            </div>
-
-            <div className="bg-earth-800/50 px-4 py-3 text-xs text-earth-400 flex items-center gap-2">
+            <span className="flex items-center gap-2">
               <FiUsers size={12} />
-              Tier applies for{' '}
-              {result.tier.minPeople === result.tier.maxPeople
-                ? `${result.tier.minPeople} person`
-                : `${result.tier.minPeople}–${result.tier.maxPeople} people`}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              {tier.minPeople === tier.maxPeople ? `${tier.minPeople} person` : `${tier.minPeople}–${tier.maxPeople} people`}
+            </span>
+            <span>{fmt(tier.totalPrice, currency)}</span>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

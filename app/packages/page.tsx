@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FiArrowRight } from 'react-icons/fi'
 import PackageCard from '@/components/PackageCard'
+import PackageCategoryFilter from '@/components/PackageCategoryFilter'
 import AnimatedSection, { StaggerContainer, StaggerItem } from '@/components/AnimatedSection'
 import { getAllPackages, getPackagesPageContent } from '@/lib/queries'
 
@@ -16,17 +17,28 @@ export const metadata: Metadata = {
 
 const DEFAULT_HERO_BG = 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=1920&q=80'
 
-export default async function PackagesPage() {
-  const [packages, pkgPage] = await Promise.all([getAllPackages(), getPackagesPageContent()])
+interface PackagesPageProps {
+  searchParams: Promise<{ category?: string }>
+}
+
+export default async function PackagesPage({ searchParams }: PackagesPageProps) {
+  const { category } = await searchParams
+  const activeCategory = category || 'all'
+
+  const [allPackages, pkgPage] = await Promise.all([getAllPackages(), getPackagesPageContent()])
 
   const categories = [
-    { value: 'all', label: 'All' },
+    { value: 'all', label: 'All Regions' },
     { value: 'safari', label: 'Safari' },
     { value: 'beach', label: 'Beach & Islands' },
     { value: 'cultural', label: 'Cultural' },
     { value: 'adventure', label: 'Adventure' },
     { value: 'city', label: 'City Tours' },
   ]
+
+  const packages = activeCategory === 'all'
+    ? allPackages
+    : allPackages.filter((p) => p.category === activeCategory)
 
   return (
     <>
@@ -48,11 +60,9 @@ export default async function PackagesPage() {
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
           <AnimatedSection>
             <p className="label-gold mb-4">Personally Tested · Crafted With Care</p>
-            <h1 className="font-serif text-6xl sm:text-7xl font-bold text-cream-100 leading-none mb-4">
-              {pkgPage.heroTitle || 'Travel'}
-            </h1>
-            <h1 className="font-serif text-6xl sm:text-7xl font-bold text-gold-400 italic leading-none mb-8">
-              {pkgPage.heroTitleItalic || 'Packages'}
+            <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-cream-100 leading-tight mb-8">
+              {pkgPage.heroTitle || 'Explore Premier Safari'}{' '}
+              <span className="text-gold-400 italic">{pkgPage.heroTitleItalic || 'Destinations'}</span>
             </h1>
             <p className="text-cream-100/75 text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-10">
               {pkgPage.heroDescription ||
@@ -112,13 +122,17 @@ export default async function PackagesPage() {
       ============================ */}
       <section id="packages" className="py-24 bg-cream-100">
         <div className="max-w-screen-2xl mx-auto px-6 lg:px-10">
-          <AnimatedSection className="mb-14">
+          <AnimatedSection className="mb-10">
             <p className="label-gold mb-3">All Packages</p>
             <h2 className="section-title">
               Choose Your<br />
               <span className="text-gold-500 italic">Adventure</span>
             </h2>
           </AnimatedSection>
+
+          <div className="mb-14">
+            <PackageCategoryFilter active={activeCategory} categories={categories} />
+          </div>
 
           {packages.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

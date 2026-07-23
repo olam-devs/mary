@@ -8,6 +8,7 @@ import contactPage from './contactPage'
 import portfolioSettings from './portfolioSettings'
 import blogPage from './blogPage'
 import packagesPage from './packagesPage'
+import conservationPage from './conservationPage'
 
 export const schemaTypes = [
   // Singletons
@@ -18,6 +19,7 @@ export const schemaTypes = [
   contactPage,
   portfolioSettings,
   aboutContent,
+  conservationPage,
   // Collections
   blogPost,
   travelPackage,

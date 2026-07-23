@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FiArrowRight, FiExternalLink, FiDownload } from 'react-icons/fi'
 import AnimatedSection, { StaggerContainer, StaggerItem } from '@/components/AnimatedSection'
-import { getAllPortfolioItems, getSiteSettings, getPortfolioSettings } from '@/lib/queries'
+import { getAllPortfolioItems, getSiteSettings, getPortfolioSettings, getAboutContent } from '@/lib/queries'
 import { BRAND } from '@/lib/brand'
 
 export const metadata: Metadata = {
@@ -33,10 +33,11 @@ const typeLabels: Record<string, string> = {
 }
 
 export default async function PortfolioPage() {
-  const [items, settings, portfolioData] = await Promise.all([
+  const [items, settings, portfolioData, about] = await Promise.all([
     getAllPortfolioItems(),
     getSiteSettings(),
     getPortfolioSettings(),
+    getAboutContent(),
   ])
 
   const mediaKitUrl = settings.mediaKit?.asset?.url
@@ -48,6 +49,7 @@ export default async function PortfolioPage() {
   const pitchDescription = portfolioData.pitchDescription
   const pitchBullets = portfolioData.pitchBullets ?? []
   const testimonials = portfolioData.testimonials ?? []
+  const bioText = about.bioText ?? []
 
   return (
     <>
@@ -101,6 +103,76 @@ export default async function PortfolioPage() {
       </section>
 
       {/* ============================
+          MEET THE CREATOR
+      ============================ */}
+      {bioText.length > 0 && (
+        <section className="overflow-hidden bg-cream-100 py-24 lg:py-32">
+          <div className="max-w-screen-xl mx-auto px-6 lg:px-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-stretch">
+              <div className="lg:col-span-4 order-2 lg:order-1">
+                <AnimatedSection direction="left" className="h-full">
+                  <div className="bg-earth-900 shadow-luxury overflow-hidden h-full">
+                    <div className="relative h-full min-h-[420px]">
+                      {about.profileImage?.imageUrl && (
+                        <Image
+                          src={about.profileImage.imageUrl}
+                          alt={about.profileImage?.alt || BRAND.legalName}
+                          fill
+                          className="object-cover object-top"
+                          sizes="(min-width: 1024px) 34vw, 100vw"
+                        />
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-earth-900/85 via-earth-900/10 to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 p-7">
+                        <p className="font-serif text-cream-100 text-xl italic leading-relaxed">
+                          "{about.quote ?? 'Adventure is a right, not a luxury.'}"
+                        </p>
+                        <div className="h-px bg-gold-400/40 w-16 mt-6" />
+                        <p className="text-earth-300 text-xs uppercase tracking-widest mt-4">
+                          {BRAND.legalName}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </AnimatedSection>
+              </div>
+
+              <div className="lg:col-span-8 order-1 lg:order-2">
+                <AnimatedSection direction="right" className="h-full">
+                  <div className="bg-white border border-earth-200 shadow-card p-10 lg:p-12 h-full flex flex-col justify-center">
+                    <p className="label-gold mb-5">Meet the Creator</p>
+                    <h2 className="font-serif text-3xl sm:text-4xl font-bold text-earth-900 leading-tight mb-6">
+                      The Person <span className="text-gold-500 italic">Behind Minzah Safaris</span>
+                    </h2>
+                    {bioText.map((para, i) => (
+                      <p key={i} className="text-earth-600 text-base leading-[1.9] mt-4 first:mt-0">
+                        {para}
+                      </p>
+                    ))}
+
+                    {about.highlights && about.highlights.length > 0 && (
+                      <ul className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        {about.highlights.map((h) => (
+                          <li key={h} className="flex items-start gap-2 text-earth-700 text-sm">
+                            <span className="text-gold-500 mt-0.5 flex-shrink-0">→</span>
+                            {h}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+
+                    <Link href="/about" className="btn-outline-dark inline-flex items-center gap-2 mt-8 self-start">
+                      About Minzah Safaris <FiArrowRight size={14} />
+                    </Link>
+                  </div>
+                </AnimatedSection>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ============================
           SERVICES
       ============================ */}
       <section className="py-24 bg-cream-100">
@@ -134,6 +206,65 @@ export default async function PortfolioPage() {
           </StaggerContainer>
         </div>
       </section>
+
+      {/* ============================
+          FEATURED LODGES
+      ============================ */}
+      {items.filter((i) => i.featured).length > 0 && (
+        <section className="py-24 bg-earth-900">
+          <div className="max-w-screen-2xl mx-auto px-6 lg:px-10">
+            <AnimatedSection className="text-center mb-16">
+              <p className="label-gold mb-4">Trusted By</p>
+              <h2 className="section-title-light">
+                Featured<br />
+                <span className="text-gold-400 italic">Lodges & Partners</span>
+              </h2>
+              <p className="text-earth-300 text-base leading-relaxed max-w-2xl mx-auto mt-6">
+                A collection of lodges and hospitality brands whose digital presence and booking
+                volume have been transformed through this partnership ecosystem.
+              </p>
+            </AnimatedSection>
+
+            <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-8" staggerChildren={0.08}>
+              {items.filter((i) => i.featured).slice(0, 6).map((item) => {
+                const imageUrl =
+                  item.projectImage?.imageUrl ||
+                  item.projectImage?.asset?.url ||
+                  item.media?.[0]?.imageUrl ||
+                  item.media?.[0]?.asset?.url
+                const statLine = item.results?.slice(0, 2).map((r) => `${r.value} ${r.label}`).join(' · ')
+
+                return (
+                  <StaggerItem key={item._id}>
+                    <div className="group overflow-hidden rounded-xl">
+                      <div className="relative mb-5 aspect-[4/3] overflow-hidden rounded-xl">
+                        {imageUrl ? (
+                          <Image
+                            src={imageUrl}
+                            alt={item.title}
+                            fill
+                            className="object-cover transition-transform duration-500 group-hover:scale-110"
+                            sizes="(max-width: 768px) 100vw, 33vw"
+                          />
+                        ) : (
+                          <div className="absolute inset-0 bg-earth-800" />
+                        )}
+                        {item.brand && (
+                          <span className="absolute right-4 top-4 rounded bg-earth-900/70 px-3 py-1 text-xs text-cream-100 backdrop-blur-md">
+                            {item.brand}
+                          </span>
+                        )}
+                      </div>
+                      <h4 className="mb-1 font-serif text-lg font-bold text-cream-100">{item.title}</h4>
+                      {statLine && <p className="text-sm text-earth-300">{statLine}</p>}
+                    </div>
+                  </StaggerItem>
+                )
+              })}
+            </StaggerContainer>
+          </div>
+        </section>
+      )}
 
       {/* ============================
           INSIGHTS / SOCIAL PROOF

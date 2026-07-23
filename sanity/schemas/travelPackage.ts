@@ -143,6 +143,27 @@ export default defineType({
       validation: (Rule) => Rule.required().min(1),
     }),
     defineField({
+      name: 'itinerary',
+      title: 'Day-by-Day Itinerary',
+      type: 'array',
+      description: 'Optional. Add one entry per day or day range.',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({ name: 'dayLabel', type: 'string', title: 'Day Label (e.g., "Day 1" or "Day 2–3")' }),
+            defineField({ name: 'title', type: 'string', title: 'Title' }),
+            defineField({ name: 'description', type: 'text', rows: 3, title: 'Description' }),
+            defineField({ name: 'meals', type: 'string', title: 'Meals (e.g., "All Meals")' }),
+            defineField({ name: 'stay', type: 'string', title: 'Overnight Stay (e.g., "Luxury Tented Camp")' }),
+          ],
+          preview: {
+            select: { title: 'title', subtitle: 'dayLabel' },
+          },
+        },
+      ],
+    }),
+    defineField({
       name: 'included',
       title: "What's Included",
       type: 'array',
